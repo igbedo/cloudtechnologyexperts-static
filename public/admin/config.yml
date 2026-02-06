@@ -1,0 +1,34 @@
+backend:
+  name: github
+  repo: YOUR_GITHUB_ORG_OR_USER/cloudtechnologyexperts-static
+  branch: main
+
+media_folder: "public/media/uploads"
+public_folder: "/media/uploads"
+
+collections:
+  - name: "blog"
+    label: "Blog Posts"
+    folder: "content/blog"
+    create: true
+    nested:
+      depth: 2
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - label: "Category"
+        name: "category"
+        widget: "object"
+        fields:
+          - { label: "Name", name: "name", widget: "string" }
+          - { label: "Slug", name: "slug", widget: "string" }
+      - { label: "Slug", name: "slug", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DD" }
+      - { label: "Author", name: "author", widget: "string", default: "Damian Igbe, PhD" }
+      - { label: "Author Image", name: "author_image", widget: "image", required: false }
+      - { label: "Hero Image", name: "image", widget: "image", required: false }
+      - { label: "Meta Description", name: "meta_desc", widget: "text", required: false }
+      - { label: "Meta Tags", name: "meta_tags", widget: "string", required: false }
+      - { label: "Featured", name: "featured", widget: "boolean", default: false, required: false }
+      - { label: "Body (HTML allowed)", name: "body", widget: "markdown" }
+

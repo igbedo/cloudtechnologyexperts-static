@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>{{TITLE}} | Cloud Technology Experts</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+  <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/static/css/fontAwesome5Pro.css">
+  <link rel="stylesheet" href="/static/css/default.css">
+  <link rel="stylesheet" href="/static/css/style.css">
+  <link rel="stylesheet" href="/static/css/custom.css">
+</head>
+
+<body>
+  <!--HEADER-->
+  <!-- Paste your header2 static HTML here if you want -->
+  <main>
+
+   <section class="page__title-area page__title-height page__title-overlay d-flex align-items-center"
+         data-background="{{HERO_IMAGE}}"
+         style="background-image:url('{{HERO_IMAGE}}'); background-size:cover; background-position:center;">
+      <div class="container">
+        <div class="row">
+          <div class="col-xxl-10 col-xl-10 col-lg-10">
+            <div class="page__title-wrapper mt-110">
+
+              <nav aria-label="breadcrumb" style="margin-bottom:10px;">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="/">Home</a></li>
+                  <li class="breadcrumb-item"><a href="/blogs/">Blogs</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">{{TITLE}}</li>
+                </ol>
+              </nav>
+
+              <span class="page__title-pre">{{CATEGORY_NAME}}</span>
+              <h3 class="page__title-2">{{TITLE}}</h3>
+
+              <div class="blog__meta d-flex align-items-center" style="gap:18px; flex-wrap:wrap;">
+                <div class="blog__author d-flex align-items-center">
+                  <div class="blog__author-thumb mr-10">
+                    <!-- optional -->
+                    <span id="authorImg"></span>
+                  </div>
+                  <div class="blog__author-info blog__author-info-2">
+                    <h5 style="margin:0;">{{AUTHOR}}</h5>
+                  </div>
+                </div>
+
+                <div class="blog__date blog__date-2 d-flex align-items-center">
+                  <i class="fal fa-clock"></i>
+                  <span>{{DATE}}</span>
+                </div>
+
+                <div class="blog__date blog__date-2 d-flex align-items-center">
+                  <i class="fal fa-book"></i>
+                  <span id="readingTime">~3 min read</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="blog__area no-padding-top">
+      <div class="container">
+        <div class="row">
+          <div class="col-xxl-8 col-xl-8 col-lg-8">
+            <div class="blog__wrapper">
+
+              <div class="white-bg" style="border-radius:10px; padding:14px 16px; margin-bottom:18px;">
+                <div class="d-flex align-items-center justify-content-between" style="gap:12px; flex-wrap:wrap;">
+                  <div style="font-weight:600; color:#0e1133;">Share this post</div>
+                  <div class="d-flex align-items-center" style="gap:10px; flex-wrap:wrap;">
+                    <button type="button" class="e-btn" id="copyLinkBtn" style="padding:10px 14px;">Copy Link</button>
+                    <a class="e-btn e-btn-border" style="padding:10px 14px;"
+                       href="https://www.linkedin.com/sharing/share-offsite/?url=" target="_blank" rel="noopener" id="shareLinkedIn">LinkedIn</a>
+                    <a class="e-btn e-btn-border" style="padding:10px 14px;"
+                       href="https://twitter.com/intent/tweet?url=&text=" target="_blank" rel="noopener" id="shareX">X</a>
+                  </div>
+                </div>
+                <small id="copyHint" style="display:none; margin-top:10px; color:#198754; font-weight:600;">Link copied!</small>
+              </div>
+
+              <div class="blog__text mb-40" id="postBody">
+                {{BODY_HTML}}
+              </div>
+
+              <div class="blog__line"></div>
+            </div>
+          </div>
+
+          <div class="col-xxl-4 col-xl-4 col-lg-4">
+            <div class="blog__sidebar pl-70" id="stickySidebar">
+               <!-- Recent posts -->
+<div class="sidebar__widget mb-55">
+  <div class="sidebar__widget-head mb-35">
+    <h3 class="sidebar__widget-title">Recent posts</h3>
+  </div>
+  <div class="sidebar__widget-content">
+    <div class="rc__post-wrapper" id="recentPosts"></div>
+  </div>
+</div>
+
+<!-- Categories -->
+<div class="sidebar__widget mb-55">
+  <div class="sidebar__widget-head mb-35">
+    <h3 class="sidebar__widget-title">Categories</h3>
+  </div>
+  <div class="sidebar__widget-content">
+    <div class="sidebar__category">
+      <ul id="categoriesList"></ul>
+    </div>
+  </div>
+</div>
+
+              <div class="sidebar__widget mb-60">
+                <div class="sidebar__widget-content">
+                  <div class="sidebar__search p-relative">
+                    <form method="get" action="/blogs/">
+                      <input type="text" name="q" placeholder="Search blog...">
+                      <input type="hidden" name="category" value="{{CATEGORY_SLUG}}">
+                      <button type="submit" aria-label="Search">
+                        <i class="fas fa-search"></i>
+                      </button>
+                    </form>
+                  </div>
+
+                  <div style="margin-top:10px;">
+                    <a class="link-btn" href="/blogs/">Browse all posts <i class="arrow_right"></i></a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- You can optionally add recent posts + categories here later using JS + search.json -->
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+<!--FOOTER-->
+
+  <script>
+    (function () {
+      // Share links
+      const url = encodeURIComponent(window.location.href);
+      const title = encodeURIComponent(document.title);
+      const li = document.getElementById("shareLinkedIn");
+      const x = document.getElementById("shareX");
+      if (li) li.href = "https://www.linkedin.com/sharing/share-offsite/?url=" + url;
+      if (x) x.href = "https://twitter.com/intent/tweet?url=" + url + "&text=" + title;
+
+      // Copy link
+      const copyBtn = document.getElementById("copyLinkBtn");
+      const hint = document.getElementById("copyHint");
+      if (copyBtn) {
+        copyBtn.addEventListener("click", async function () {
+          try {
+            await navigator.clipboard.writeText(window.location.href);
+            hint.style.display = "block";
+            setTimeout(() => (hint.style.display = "none"), 1800);
+          } catch (e) {}
+        });
+      }
+
+      // Reading time
+      const body = document.getElementById("postBody");
+      const rt = document.getElementById("readingTime");
+      if (body && rt) {
+        const text = body.innerText || "";
+        const words = text.trim().split(/\s+/).filter(Boolean).length;
+        const minutes = Math.max(1, Math.round(words / 200));
+        rt.textContent = "~" + minutes + " min read";
+      }
+
+      // Sticky sidebar
+      const sidebar = document.getElementById("stickySidebar");
+      if (sidebar) {
+        function applySticky() {
+          if (window.innerWidth >= 992) {
+            sidebar.style.position = "sticky";
+            sidebar.style.top = "120px";
+          } else {
+            sidebar.style.position = "static";
+            sidebar.style.top = "auto";
+          }
+        }
+        applySticky();
+        window.addEventListener("resize", applySticky);
+      }
+    })();
+  </script>
+
+
+<script>
+(async function () {
+  try {
+    const res = await fetch("/search.json", { cache: "no-store" });
+    const posts = await res.json();
+
+    // Recent posts (top 5)
+    const recentWrap = document.getElementById("recentPosts");
+    if (recentWrap) {
+      const recent = posts.slice(0, 5);
+      recentWrap.innerHTML = recent.map(r => {
+        const img = r.image || "/static/img/blog-placeholder.jpg";
+        return `
+          <div class="rc__post d-flex align-items-center">
+            <div class="rc__thumb mr-20">
+              <a href="${r.url}"><img src="${img}" alt="${escapeHtml(r.title || "")}"></a>
+            </div>
+            <div class="rc__content">
+              <div class="rc__meta"><span>${escapeHtml(r.date || "")}</span></div>
+              <h6 class="rc__title"><a href="${r.url}">${escapeHtml(r.title || "")}</a></h6>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    // Categories
+    const categoriesMap = new Map();
+    posts.forEach(p => {
+      const c = p.category || {};
+      if (c.slug) categoriesMap.set(c.slug, c.name || c.slug);
+    });
+
+    const categoriesList = document.getElementById("categoriesList");
+    if (categoriesList) {
+      const items = [];
+      items.push(`<li><a href="/blogs/">All</a></li>`);
+      Array.from(categoriesMap.entries())
+        .sort((a,b) => a[1].localeCompare(b[1]))
+        .forEach(([slug, name]) => {
+          items.push(`<li><a href="/blogs/?category=${encodeURIComponent(slug)}">${escapeHtml(name)}</a></li>`);
+        });
+      categoriesList.innerHTML = items.join("");
+    }
+
+    function escapeHtml(s) {
+      return String(s).replace(/[&<>"']/g, m => ({
+        "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+      }[m]));
+    }
+  } catch (e) {
+    // no-op
+  }
+})();
+</script>
+
+</body>
+</html>
+
