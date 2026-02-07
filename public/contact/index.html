@@ -243,7 +243,9 @@
               </div>
 
               <!-- WORKING FORMSPREE FORM -->
-              <form action="https://formspree.io/f/mkgpdbka" method="POST">
+             <!-- <form action="https://formspree.io/f/mkgpdbka" method="POST">-->
+               <form action="/api/contact" method="POST">
+
                 <!-- Redirect after submit -->
                 <input type="hidden" name="_next" value="https://cloudtechnologyexperts.com/contact/thanks/" />
                 <!-- Subject line -->
@@ -280,6 +282,10 @@
                   <label for="message" class="requiredField">Message<span class="asteriskField">*</span></label>
                   <textarea name="message" cols="40" rows="10" class="form-control" required id="message"></textarea>
                 </div>
+                 <!-- Turnstile -->
+                 <div class="cf-turnstile" data-sitekey="YOUR_TURNSTILE_SITE_KEY"></div>
+                 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
 
                 <button type="submit" class="e-btn">Submit</button>
               </form>
@@ -453,7 +459,7 @@
           <div class="row">
             <div class="col-xxl-12">
               <div class="footer__copyright text-center">
-                <p>© 2024 Cloud Technology Experts - All Rights Reserved.</p>
+                <p>© 2026 Cloud Technology Experts - All Rights Reserved.</p>
               </div>
             </div>
           </div>
