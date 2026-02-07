@@ -82,12 +82,10 @@
                <div class="mobile-menu fix mean-container"><div class="mean-bar"><a href="#nav" class="meanmenu-reveal" style="right: 0px; left: auto; display: inline;"><span><span><span></span></span></span></a>
                </div>
                </div>
-      
+       <div class="cf-turnstile" data-sitekey="0x4AAAAAACY-kc97ZsqBWIQa"></div>
+                 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script> 
                <div class="sidebar__search p-relative mt-40 ">
-              <form
-               action="https://formspree.io/f/mkgpdbka"
-               method="POST"
-               >
+                   <form action="/api/contact" method="POST">
                      <input type="text" name='search' placeholder="Search...">
                      <button type="submit"><i class="fad fa-search"></i></button>
                   </form>
@@ -266,279 +264,287 @@
             <!-- Errors -->
             
 
-            <form method="post" action="/application/">
-              <input type="hidden" name="csrfmiddlewaretoken" value="surKe2rgwWasAcK3sIa7YBGv6gQsPQOTtCdpeUHRLpZ6kIqMQ9XvrgyNwdkIGJaA">
+            <form method="POST" action="/api/contact" id="cteApplicationForm">
+  <!-- Route this submission inside your single contact.js endpoint -->
+  <input type="hidden" name="form_type" value="application">
 
-              <span>1. Your Personal Details</span>
-              <div class="row">
+  <span>1. Your Personal Details</span>
+  <div class="row">
 
-                <div class="col-xxl-6 col-xl-6 col-md-6">
-                  <div class="contact__form-input">
-                    <input type="text" placeholder="First Name" name="fname" required
-                           value="">
-                  </div>
-                </div>
+    <div class="col-xxl-6 col-xl-6 col-md-6">
+      <div class="contact__form-input">
+        <input type="text" placeholder="First Name" name="fname" required>
+      </div>
+    </div>
 
-                <div class="col-xxl-6 col-xl-6 col-md-6">
-                  <div class="contact__form-input">
-                    <input type="text" placeholder="Last Name" name="lname" required
-                           value="">
-                  </div>
-                </div>
+    <div class="col-xxl-6 col-xl-6 col-md-6">
+      <div class="contact__form-input">
+        <input type="text" placeholder="Last Name" name="lname" required>
+      </div>
+    </div>
 
-                <div class="col-xxl-6 col-xl-6 col-md-6">
-                  <div class="contact__form-input">
-                    <input type="tel" placeholder="Phone" name="phone" required
-                           value="">
-                  </div>
-                </div>
+    <div class="col-xxl-6 col-xl-6 col-md-6">
+      <div class="contact__form-input">
+        <input type="tel" placeholder="Phone" name="phone" required>
+      </div>
+    </div>
 
-                <div class="col-xxl-6 col-xl-6 col-md-6">
-                  <div class="contact__form-input">
-                    <input type="email" placeholder="Email" name="email" required
-                           value="">
-                  </div>
-                </div>
+    <div class="col-xxl-6 col-xl-6 col-md-6">
+      <div class="contact__form-input">
+        <input type="email" placeholder="Email" name="email" required>
+      </div>
+    </div>
 
-                <div class="col-xxl-12 col-xl-12 col-md-12">
-                  <div class="contact__form-input">
-                    <input type="text" placeholder="City, State (optional)" name="location"
-                           value="">
-                  </div>
-                </div>
+    <div class="col-xxl-12 col-xl-12 col-md-12">
+      <div class="contact__form-input">
+        <input type="text" placeholder="City, State (optional)" name="location">
+      </div>
+    </div>
 
-                <!-- Career Track -->
-                <div class="col-xxl-12 mt-25">
-                  <span>2. Your Career Track</span>
-                  <div class="contact__form-input">
-                    <p class="mb-10">Please select your Career Track:</p>
+    <!-- Career Track -->
+    <div class="col-xxl-12 mt-25">
+      <span>2. Your Career Track</span>
+      <div class="contact__form-input">
+        <p class="mb-10">Please select your Career Track:</p>
 
-                    <label style="display:block; margin-bottom:8px;">
-                      <input type="radio" name="track" value="cloud" required style="height:15px; width:15px;"
-                             >
-                      <span style="margin-left:8px;">Cloud Career Track</span>
-                    </label>
+        <label style="display:block; margin-bottom:8px;">
+          <input type="radio" name="track" value="cloud" required style="height:15px; width:15px;">
+          <span style="margin-left:8px;">Cloud Career Track</span>
+        </label>
 
-                    <label style="display:block; margin-bottom:8px;">
-                      <input type="radio" name="track" value="cyber" style="height:15px; width:15px;"
-                             >
-                      <span style="margin-left:8px;">Cybersecurity Career Track</span>
-                    </label>
+        <label style="display:block; margin-bottom:8px;">
+          <input type="radio" name="track" value="cyber" style="height:15px; width:15px;">
+          <span style="margin-left:8px;">Cybersecurity Career Track</span>
+        </label>
 
-                    <label style="display:block; margin-bottom:8px;">
-                      <input type="radio" name="track" value="devops" style="height:15px; width:15px;"
-                             >
-                      <span style="margin-left:8px;">DevOps &amp; Automation Track</span>
-                    </label>
+        <label style="display:block; margin-bottom:8px;">
+          <input type="radio" name="track" value="devops" style="height:15px; width:15px;">
+          <span style="margin-left:8px;">DevOps &amp; Automation Track</span>
+        </label>
 
-                    <label style="display:block; margin-bottom:8px;">
-                      <input type="radio" name="track" value="ai" style="height:15px; width:15px;"
-                             >
-                      <span style="margin-left:8px;">AI Workforce Readiness Track</span>
-                    </label>
-                  </div>
-                </div>
+        <label style="display:block; margin-bottom:8px;">
+          <input type="radio" name="track" value="ai" style="height:15px; width:15px;">
+          <span style="margin-left:8px;">AI Workforce Readiness Track</span>
+        </label>
+      </div>
+    </div>
 
-                <!-- Funding -->
-                <div class="col-xxl-12 mt-25">
-                  <span>3. Funding &amp; Support</span>
-                  <div class="contact__form-input">
-                    <p class="mb-10">Please indicate how you intend to fund your training:</p>
+    <!-- Funding -->
+    <div class="col-xxl-12 mt-25">
+      <span>3. Funding &amp; Support</span>
+      <div class="contact__form-input">
+        <p class="mb-10">Please indicate how you intend to fund your training:</p>
 
-                    <label style="display:block; margin-bottom:8px;">
-                      <input type="radio" name="funding_type" value="self_pay" required style="height:15px; width:15px;"
-                             >
-                      <span style="margin-left:8px;">Self-Pay (Upfront / Installments)</span>
-                    </label>
+        <label style="display:block; margin-bottom:8px;">
+          <input type="radio" name="funding_type" value="self_pay" required style="height:15px; width:15px;">
+          <span style="margin-left:8px;">Self-Pay (Upfront / Installments)</span>
+        </label>
 
-                    <label style="display:block; margin-bottom:8px;">
-                      <input type="radio" name="funding_type" value="wioa" style="height:15px; width:15px;"
-                             >
-                      <span style="margin-left:8px;">WIOA / Workforce Program</span>
-                    </label>
+        <label style="display:block; margin-bottom:8px;">
+          <input type="radio" name="funding_type" value="wioa" style="height:15px; width:15px;">
+          <span style="margin-left:8px;">WIOA / Workforce Program</span>
+        </label>
 
-                    <label style="display:block; margin-bottom:8px;">
-                      <input type="radio" name="funding_type" value="scholarship" style="height:15px; width:15px;"
-                             >
-                      <span style="margin-left:8px;">School Scholarship (limited)</span>
-                    </label>
+        <label style="display:block; margin-bottom:8px;">
+          <input type="radio" name="funding_type" value="scholarship" style="height:15px; width:15px;">
+          <span style="margin-left:8px;">School Scholarship (limited)</span>
+        </label>
 
-                    <label style="display:block; margin-bottom:8px;">
-                      <input type="radio" id="funding_donor" name="funding_type" value="donor" style="height:15px; width:15px;"
-                             >
-                      <span style="margin-left:8px;"><strong>Donor-Funded Seat (Free Training)</strong></span>
-                    </label>
+        <label style="display:block; margin-bottom:8px;">
+          <input type="radio" id="funding_donor" name="funding_type" value="donor" style="height:15px; width:15px;">
+          <span style="margin-left:8px;"><strong>Donor-Funded Seat (Free Training)</strong></span>
+        </label>
 
-                    <label style="display:block; margin-bottom:8px;">
-                      <input type="radio" name="funding_type" value="unsure" style="height:15px; width:15px;"
-                             >
-                      <span style="margin-left:8px;">Not sure — help me decide</span>
-                    </label>
-                  </div>
-                </div>
+        <label style="display:block; margin-bottom:8px;">
+          <input type="radio" name="funding_type" value="unsure" style="height:15px; width:15px;">
+          <span style="margin-left:8px;">Not sure — help me decide</span>
+        </label>
+      </div>
+    </div>
 
-                <!-- Donor-only -->
-                <div class="col-xxl-12 mt-10" id="donor_fields" style="display:none;">
-                  <div class="contact__form-input">
-                    <p class="mb-10">
-                      <strong>Donor-Funded Seat Screening</strong><br>
-                      Donor-funded seats are limited. We prioritize students who demonstrate readiness and commitment.
-                    </p>
-                  </div>
+    <!-- Donor-only -->
+    <div class="col-xxl-12 mt-10" id="donor_fields" style="display:none;">
+      <div class="contact__form-input">
+        <p class="mb-10">
+          <strong>Donor-Funded Seat Screening</strong><br>
+          Donor-funded seats are limited. We prioritize students who demonstrate readiness and commitment.
+        </p>
+      </div>
 
-                  <div class="row">
-                    <div class="col-xxl-6 col-xl-6 col-md-6">
-                      <div class="contact__form-input">
-                        <label class="small" style="display:block; margin-bottom:6px;">Employment Status</label>
-                        <select name="employment_status">
-                          <option value="" selected>Select</option>
-                          <option value="unemployed" >Unemployed</option>
-                          <option value="underemployed" >Underemployed</option>
-                          <option value="employed" >Employed</option>
-                          <option value="student" >Student</option>
-                        </select>
-                      </div>
-                    </div>
+      <div class="row">
+        <div class="col-xxl-6 col-xl-6 col-md-6">
+          <div class="contact__form-input">
+            <label class="small" style="display:block; margin-bottom:6px;">Employment Status</label>
+            <select name="employment_status">
+              <option value="" selected>Select</option>
+              <option value="unemployed">Unemployed</option>
+              <option value="underemployed">Underemployed</option>
+              <option value="employed">Employed</option>
+              <option value="student">Student</option>
+            </select>
+          </div>
+        </div>
 
-                    <div class="col-xxl-6 col-xl-6 col-md-6">
-                      <div class="contact__form-input">
-                        <label class="small" style="display:block; margin-bottom:6px;">Income Range (choose one)</label>
-                        <select name="income_range">
-                          <option value="" selected>Select</option>
-                          <option value="u25" >Under $25k</option>
-                          <option value="25_40" >$25k–$40k</option>
-                          <option value="40_60" >$40k–$60k</option>
-                          <option value="60p" >$60k+</option>
-                          <option value="na" >Prefer not to say</option>
-                        </select>
-                      </div>
-                    </div>
+        <div class="col-xxl-6 col-xl-6 col-md-6">
+          <div class="contact__form-input">
+            <label class="small" style="display:block; margin-bottom:6px;">Income Range (choose one)</label>
+            <select name="income_range">
+              <option value="" selected>Select</option>
+              <option value="u25">Under $25k</option>
+              <option value="25_40">$25k–$40k</option>
+              <option value="40_60">$40k–$60k</option>
+              <option value="60p">$60k+</option>
+              <option value="na">Prefer not to say</option>
+            </select>
+          </div>
+        </div>
 
-                    <div class="col-xxl-6 col-xl-6 col-md-6">
-                      <div class="contact__form-input">
-                        <label class="small" style="display:block; margin-bottom:6px;">Do you have a reliable laptop/desktop?</label>
-                        <select name="has_laptop">
-                          <option value="" selected>Select</option>
-                          <option value="Yes" >Yes</option>
-                          <option value="No" >No</option>
-                        </select>
-                      </div>
-                    </div>
+        <div class="col-xxl-6 col-xl-6 col-md-6">
+          <div class="contact__form-input">
+            <label class="small" style="display:block; margin-bottom:6px;">Do you have a reliable laptop/desktop?</label>
+            <select name="has_laptop">
+              <option value="" selected>Select</option>
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+        </div>
 
-                    <div class="col-xxl-6 col-xl-6 col-md-6">
-                      <div class="contact__form-input">
-                        <label class="small" style="display:block; margin-bottom:6px;">Primary Barrier</label>
-                        <select name="primary_barrier">
-                          <option value="" selected>Select</option>
-                          <option value="tuition" >Tuition cost</option>
-                          <option value="schedule" >Schedule/time</option>
-                          <option value="childcare" >Childcare/family responsibilities</option>
-                          <option value="transport" >Transportation</option>
-                          <option value="laptop" >Laptop/internet access</option>
-                          <option value="confidence" >Confidence/skill gap</option>
-                          <option value="other" >Other</option>
-                        </select>
-                      </div>
-                    </div>
+        <div class="col-xxl-6 col-xl-6 col-md-6">
+          <div class="contact__form-input">
+            <label class="small" style="display:block; margin-bottom:6px;">Primary Barrier</label>
+            <select name="primary_barrier">
+              <option value="" selected>Select</option>
+              <option value="tuition">Tuition cost</option>
+              <option value="schedule">Schedule/time</option>
+              <option value="childcare">Childcare/family responsibilities</option>
+              <option value="transport">Transportation</option>
+              <option value="laptop">Laptop/internet access</option>
+              <option value="confidence">Confidence/skill gap</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+        </div>
 
-                    <div class="col-xxl-12">
-                      <div class="contact__form-input">
-                        <textarea name="donor_statement" rows="4"
-                          placeholder="Why should we award you a donor-funded seat? (2–5 sentences: your goal, your situation, and your commitment)"></textarea>
-                      </div>
-                    </div>
+        <div class="col-xxl-12">
+          <div class="contact__form-input">
+            <textarea name="donor_statement" rows="4"
+              placeholder="Why should we award you a donor-funded seat? (2–5 sentences: your goal, your situation, and your commitment)"></textarea>
+          </div>
+        </div>
 
-                    <div class="col-xxl-12">
-                      <div class="contact__form-input" style="padding-top: 5px;">
-                        <label style="display:block; margin-bottom:10px;">
-                          <input type="checkbox" name="donor_reporting_consent" value="true" style="height:15px; width:15px;"
-                                 >
-                          <span style="margin-left:8px;">
-                            <strong>Required for donor-funded seats:</strong> I agree that my progress may be shared with donors in aggregate (no sensitive personal data).
-                          </span>
-                        </label>
+        <div class="col-xxl-12">
+          <div class="contact__form-input" style="padding-top: 5px;">
+            <label style="display:block; margin-bottom:10px;">
+              <input type="checkbox" name="donor_reporting_consent" value="true" style="height:15px; width:15px;">
+              <span style="margin-left:8px;">
+                <strong>Required for donor-funded seats:</strong> I agree that my progress may be shared with donors in aggregate (no sensitive personal data).
+              </span>
+            </label>
 
-                        <label style="display:block;">
-                          <input type="checkbox" name="testimonial_consent" value="true" style="height:15px; width:15px;"
-                                 >
-                          <span style="margin-left:8px;">
-                            Optional: I’m open to providing a short testimonial after graduation (first name + last initial).
-                          </span>
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+            <label style="display:block;">
+              <input type="checkbox" name="testimonial_consent" value="true" style="height:15px; width:15px;">
+              <span style="margin-left:8px;">
+                Optional: I’m open to providing a short testimonial after graduation (first name + last initial).
+              </span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
 
-                <!-- Readiness -->
-                <div class="col-xxl-12 mt-25">
-                  <span>4. Readiness &amp; Commitment</span>
-                </div>
+    <!-- Readiness -->
+    <div class="col-xxl-12 mt-25">
+      <span>4. Readiness &amp; Commitment</span>
+    </div>
 
-                <div class="col-xxl-4 col-xl-4 col-md-6">
-                  <div class="contact__form-input">
-                    <label class="small" style="display:block; margin-bottom:6px;">Weekly Time Available</label>
-                    <select name="weekly_hours">
-                      <option value="" selected>Select</option>
-                      <option value="0_5" >0–5 hours</option>
-                      <option value="6_10" >6–10 hours</option>
-                      <option value="11_15" >11–15 hours</option>
-                      <option value="16p" >16+ hours</option>
-                    </select>
-                  </div>
-                </div>
+    <div class="col-xxl-4 col-xl-4 col-md-6">
+      <div class="contact__form-input">
+        <label class="small" style="display:block; margin-bottom:6px;">Weekly Time Available</label>
+        <select name="weekly_hours">
+          <option value="" selected>Select</option>
+          <option value="0_5">0–5 hours</option>
+          <option value="6_10">6–10 hours</option>
+          <option value="11_15">11–15 hours</option>
+          <option value="16p">16+ hours</option>
+        </select>
+      </div>
+    </div>
 
-                <div class="col-xxl-4 col-xl-4 col-md-6">
-                  <div class="contact__form-input">
-                    <label class="small" style="display:block; margin-bottom:6px;">Preferred Schedule</label>
-                    <select name="preferred_schedule">
-                      <option value="" selected>Select</option>
-                      <option value="evenings" >Weekdays evenings</option>
-                      <option value="weekends" >Weekends</option>
-                      <option value="either" >Either</option>
-                    </select>
-                  </div>
-                </div>
+    <div class="col-xxl-4 col-xl-4 col-md-6">
+      <div class="contact__form-input">
+        <label class="small" style="display:block; margin-bottom:6px;">Preferred Schedule</label>
+        <select name="preferred_schedule">
+          <option value="" selected>Select</option>
+          <option value="evenings">Weekdays evenings</option>
+          <option value="weekends">Weekends</option>
+          <option value="either">Either</option>
+        </select>
+      </div>
+    </div>
 
-                <div class="col-xxl-4 col-xl-4 col-md-6">
-                  <div class="contact__form-input">
-                    <label class="small" style="display:block; margin-bottom:6px;">Start Timeframe</label>
-                    <select name="start_timeframe">
-                      <option value="" selected>Select</option>
-                      <option value="asap" >ASAP</option>
-                      <option value="next" >Next cohort</option>
-                      <option value="1_2mo" >1–2 months</option>
-                      <option value="3p" >3+ months</option>
-                    </select>
-                  </div>
-                </div>
+    <div class="col-xxl-4 col-xl-4 col-md-6">
+      <div class="contact__form-input">
+        <label class="small" style="display:block; margin-bottom:6px;">Start Timeframe</label>
+        <select name="start_timeframe">
+          <option value="" selected>Select</option>
+          <option value="asap">ASAP</option>
+          <option value="next">Next cohort</option>
+          <option value="1_2mo">1–2 months</option>
+          <option value="3p">3+ months</option>
+        </select>
+      </div>
+    </div>
 
-                <div class="col-xxl-12">
-                  <div class="contact__form-input">
-                    <textarea placeholder="What’s your career goal and why now? (optional but recommended)"
-                              name="goal_statement" rows="4"></textarea>
-                  </div>
-                </div>
+    <div class="col-xxl-12">
+      <div class="contact__form-input">
+        <textarea placeholder="What’s your career goal and why now? (optional but recommended)"
+                  name="goal_statement" rows="4"></textarea>
+      </div>
+    </div>
 
-                <!-- Experience -->
-                <div class="col-xxl-12">
-                  <div class="contact__form-input">
-                    <textarea placeholder="Please state your previous IT experience (if any)"
-                              name="message" rows="4"></textarea>
-                  </div>
-                </div>
+    <div class="col-xxl-12">
+      <div class="contact__form-input">
+        <textarea placeholder="Please state your previous IT experience (if any)"
+                  name="message" rows="4"></textarea>
+      </div>
+    </div>
 
-                <!-- Submit -->
-                <div class="col-xxl-12">
-                  <div class="contact__btn">
-                    <script src="https://www.google.com/recaptcha/api.js"></script>
-                    <div class="g-recaptcha" data-sitekey="6LcgzBwqAAAAABDS65DMJB8ZlupFsPjsmDHAtnHd"></div>
-                    <button type="submit" class="e-btn">Apply</button>
-                  </div>
-                </div>
+    <!-- Turnstile + Submit -->
+    <div class="col-xxl-12">
+      <div class="contact__btn">
 
-              </div>
-            </form>
+        <!-- Turnstile must be INSIDE the form -->
+        <div class="cf-turnstile" data-sitekey="0x4AAAAAACY-kc97ZsqBWIQa"></div>
+
+        <button type="submit" class="e-btn">Apply</button>
+      </div>
+    </div>
+
+  </div>
+</form>
+
+<!-- Turnstile script (safe to include once per page) -->
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
+<script>
+  (function () {
+    const donorFields = document.getElementById("donor_fields");
+    if (!donorFields) return;
+
+    function toggleDonorFields() {
+      const selected = document.querySelector('input[name="funding_type"]:checked');
+      donorFields.style.display = (selected && selected.value === "donor") ? "block" : "none";
+    }
+
+    document.querySelectorAll('input[name="funding_type"]').forEach((el) => {
+      el.addEventListener("change", toggleDonorFields);
+    });
+
+    toggleDonorFields();
+  })();
+</script>
+
 
           </div>
         </div>
