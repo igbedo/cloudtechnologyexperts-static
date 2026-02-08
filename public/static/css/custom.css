@@ -59,3 +59,64 @@ box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 .header__btn a .e-btn{display: block !important;}
 }
 
+
+/* =========================================================
+   GLOBAL NAV VISIBILITY FIX (works on ALL pages)
+   ========================================================= */
+
+/* Make header readable on top of any hero image */
+.header__area.header__transparent,
+#header-sticky.header__area.header__transparent {
+  background: rgba(10, 14, 30, 0.70) !important; /* dark glass */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* Make nav links readable */
+.header__area .main-menu nav > ul > li > a,
+.header__area .main-menu nav ul li a,
+.header__area .brand,
+.header__area .logo a,
+.header__area .header__right a {
+  color: #ffffff !important;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.55);
+}
+
+/* Active / hover states */
+.header__area .main-menu nav ul li:hover > a,
+.header__area .main-menu nav ul li.active > a,
+.header__area .main-menu nav ul li a.active {
+  color: #ffffff !important;
+  opacity: 0.95;
+}
+
+/* Dropdown menu background + readability */
+.header__area .submenu,
+.header__area .main-menu nav ul li .submenu {
+  background: rgba(10, 14, 30, 0.96) !important;
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+}
+
+.header__area .submenu li a {
+  color: #ffffff !important;
+  text-shadow: none;
+}
+
+/* Mobile menu panel readability (meanmenu) */
+.mean-container .mean-nav,
+.mean-container .mean-nav ul li a {
+  background: rgba(10, 14, 30, 0.98) !important;
+  color: #ffffff !important;
+}
+
+/* Optional: improve hamburger visibility */
+.sidebar-toggle-btn .line {
+  background: #ffffff !important;
+}
+
+/* Optional: ensure "Apply" button stands out */
+.header__btn .e-btn {
+  box-shadow: 0 14px 35px rgba(0,0,0,0.25);
+}
+
