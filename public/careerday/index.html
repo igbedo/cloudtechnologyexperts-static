@@ -390,61 +390,77 @@
             <div class="contact__wrapper" style="background:#fff; border-radius:16px; padding:30px; box-shadow: 0 20px 60px rgba(0,0,0,0.12);">
               <h3 class="mb-15">Your First Step to a Great Future</h3>
 
-              <!-- Clean: posts to ONE endpoint /api/contact -->
-              <form method="POST" action="/api/contact" id="cteCareerDayRegisterForm">
-                <input type="hidden" name="form_type" value="careerday">
+              <form method="POST" action="/api/contact" id="careerday">
+  <div class="row">
+    <div class="col-md-6 mb-20">
+      <input type="text" name="first_name" placeholder="First Name" required
+             style="width:100%; padding:14px; border-radius:10px; border:1px solid #e6e8ef;">
+    </div>
+    <div class="col-md-6 mb-20">
+      <input type="text" name="last_name" placeholder="Last Name" required
+             style="width:100%; padding:14px; border-radius:10px; border:1px solid #e6e8ef;">
+    </div>
 
-                <div class="row">
+    <div class="col-md-6 mb-20">
+      <input type="email" name="email" placeholder="Email" required
+             style="width:100%; padding:14px; border-radius:10px; border:1px solid #e6e8ef;">
+    </div>
+    <div class="col-md-6 mb-20">
+      <input type="tel" name="telephone" placeholder="Phone" required
+             style="width:100%; padding:14px; border-radius:10px; border:1px solid #e6e8ef;">
+    </div>
 
-                  <div class="col-md-6 mb-20">
-                    <input type="text" name="fname" placeholder="First Name" required
-                           style="width:100%; padding:14px; border-radius:10px; border:1px solid #e6e8ef;">
-                  </div>
+    <div class="col-12 mb-20">
+      <select name="interest"
+              style="width:100%; padding:14px; border-radius:10px; border:1px solid #e6e8ef;">
+        <option value="" selected>Career interest (optional)</option>
+        <option value="cyber">Cybersecurity</option>
+        <option value="cloud">Cloud</option>
+        <option value="devops">DevOps & Automation</option>
+        <option value="ai">AI Workforce Readiness</option>
+        <option value="unsure">Not sure yet</option>
+      </select>
+    </div>
 
-                  <div class="col-md-6 mb-20">
-                    <input type="text" name="lname" placeholder="Last Name" required
-                           style="width:100%; padding:14px; border-radius:10px; border:1px solid #e6e8ef;">
-                  </div>
+    <div class="col-12 mb-20">
+      <textarea name="question" rows="4"
+        placeholder="Any questions you want answered at Career Day? (optional)"
+        style="width:100%; padding:14px; border-radius:10px; border:1px solid #e6e8ef;"></textarea>
+    </div>
 
-                  <div class="col-md-6 mb-20">
-                    <input type="email" name="email" placeholder="Email" required
-                           style="width:100%; padding:14px; border-radius:10px; border:1px solid #e6e8ef;">
-                  </div>
+    <!-- Required by contact.js -->
+    <input type="hidden" name="subject" value="Career Day Registration">
+    <textarea name="message" id="careerdayMessage" style="display:none;"></textarea>
 
-                  <div class="col-md-6 mb-20">
-                    <input type="tel" name="phone" placeholder="Phone (optional)"
-                           style="width:100%; padding:14px; border-radius:10px; border:1px solid #e6e8ef;">
-                  </div>
+    <!-- Turnstile -->
+    <div class="col-12 mb-20">
+      <div class="cf-turnstile" data-sitekey="0x4AAAAAACY-kc97ZsqBWIQa"></div>
+    </div>
 
-                  <div class="col-12 mb-20">
-                    <select name="interest"
-                            style="width:100%; padding:14px; border-radius:10px; border:1px solid #e6e8ef;">
-                      <option value="" selected>Career interest (optional)</option>
-                      <option value="Cybersecurity">Cybersecurity</option>
-                      <option value="Cloud">Cloud</option>
-                      <option value="DevOps & Automation">DevOps & Automation</option>
-                      <option value="AI Workforce Readiness">AI Workforce Readiness</option>
-                      <option value="Not sure yet">Not sure yet</option>
-                    </select>
-                  </div>
+    <div class="col-12">
+      <button type="submit" class="e-btn w-100">Register <i class="fa fa-arrow-right"></i></button>
+    </div>
+  </div>
+</form>
 
-                  <div class="col-12 mb-20">
-                    <textarea name="question" rows="4"
-                              placeholder="Any questions you want answered at Career Day? (optional)"
-                              style="width:100%; padding:14px; border-radius:10px; border:1px solid #e6e8ef;"></textarea>
-                  </div>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+<script>
+  (function () {
+    const form = document.getElementById('careerdayForm');
+    if (!form) return;
 
-                  <!-- Turnstile must be inside form -->
-                  <div class="col-12 mb-20">
-                    <div class="cf-turnstile" data-sitekey="0x4AAAAAACY-kc97ZsqBWIQa"></div>
-                  </div>
+    form.addEventListener('submit', function () {
+      const interest = (form.querySelector('[name="interest"]')?.value || '').trim();
+      const question = (form.querySelector('[name="question"]')?.value || '').trim();
 
-                  <div class="col-12">
-                    <button type="submit" class="e-btn w-100">Register <i class="fa fa-arrow-right"></i></button>
-                  </div>
+      document.getElementById('careerdayMessage').value =
+        "Career Day Registration\n\n" +
+        (interest ? `Interest: ${interest}\n` : "") +
+        (question ? `Question: ${question}\n` : "");
+    });
+  })();
+</script>
 
-                </div>
-              </form>
 
               <p class="mt-15" style="font-size: 13px; opacity: 0.9;">
                 By registering, you agree to receive event emails. You can unsubscribe anytime.
