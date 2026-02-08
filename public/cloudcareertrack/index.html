@@ -131,16 +131,16 @@
                      </div>
                   </div>
 
-                  <div class="col-xxl-10 col-xl-10 col-lg-8 col-md-10 col-sm-8 col-6">
-                     <div class="header__right d-flex justify-content-end align-items-center">
-                        <div class="main-menu">
-                           <nav id="mobile-menu">
-                             
-                                 <ul style="white-space: nowrap;">
 
-                                   
-                                 
-                                 
+
+<div class="header__right d-flex justify-content-end align-items-center">
+
+  <!-- Desktop menu -->
+  <div class="main-menu d-none d-xl-block">
+    <nav id="mobile-menu">
+      <ul style="white-space: nowrap;">
+        <!-- your menu li items unchanged -->
+          
                                <li> <a href="/careerpathways/">Career Pathways</a>
                                    <ul class="submenu">
                                     <li><a href="/cloudcareertrack/">Cloud Career Track</a></li>
@@ -193,26 +193,28 @@
                                  </li>                     
 
                                 <li><a href="/contact/">Contact</a></li>
-                              </ul>
-                           </nav>
-                        </div>
-                         
-                        <div class="header__search p-relative ml-50 d-none d-md-block">
-                             
-                            <div class="header__btn ml-20 d-none d-sm-block">                        
-                              <a href="/application/" class="e-btn">Apply<i class="fa fa-arrow-right"></i> </a>
-                              <!-- <a href="/joinus/" class="e-btn">Join Us <i class="fa fa-arrow-right"></i> </a> -->
-                        </div>
+      </ul>
+    </nav>
+  </div>
 
-                        <div class="sidebar__menu d-xl-none">
-                           <div class="sidebar-toggle-btn ml-30" id="sidebar-toggle">
-                               <span class="line"></span>
-                               <span class="line"></span>
-                               <span class="line"></span>
-                           </div>
-                       </div>
+  <!-- (Optional) Desktop search area; keep hidden on mobile -->
+  <div class="header__search p-relative ml-50 d-none d-md-block"></div>
 
-                     </div>
+  <!-- Desktop apply button -->
+  <div class="header__btn ml-20 d-none d-sm-block">
+    <a href="/application/" class="e-btn">Apply<i class="fa fa-arrow-right"></i></a>
+  </div>
+
+  <!-- Mobile hamburger (NOW NOT inside d-none container) -->
+  <div class="sidebar__menu d-xl-none">
+    <div class="sidebar-toggle-btn ml-30" id="sidebar-toggle" role="button" aria-label="Open menu" tabindex="0">
+      <span class="line"></span>
+      <span class="line"></span>
+      <span class="line"></span>
+    </div>
+  </div>
+
+</div>
 
                   </div>
                </div>
