@@ -353,73 +353,110 @@
               <h3 class="mb-15">Get Webinar Updates</h3>
 
               <!-- Clean: posts to ONE endpoint /api/contact -->
-              <form method="POST" action="/api/contact" id="cteWebinarRegisterForm">
-                <input type="hidden" name="form_type" value="webinar">
+              
+<form method="POST" action="/api/contact" id="cteWebinarRegisterForm">
+  <input type="hidden" name="form_type" value="webinar">
 
-                <div class="row">
+  <!-- Bridge fields that contact.js expects -->
+  <input type="hidden" name="first_name" id="webinarFirstName">
+  <input type="hidden" name="last_name"  id="webinarLastName">
+  <input type="hidden" name="webinar"    id="webinarEvent">
+  <textarea name="message" id="webinarMessage" style="display:none;"></textarea>
 
-                  <div class="col-md-6 mb-20">
-                    <input type="text" name="fname" placeholder="First Name" required
-                           style="width:100%; padding:14px; border-radius:10px; border:1px solid #e6e8ef;">
-                  </div>
+  <div class="row">
 
-                  <div class="col-md-6 mb-20">
-                    <input type="text" name="lname" placeholder="Last Name" required
-                           style="width:100%; padding:14px; border-radius:10px; border:1px solid #e6e8ef;">
-                  </div>
+    <div class="col-md-6 mb-20">
+      <input type="text" name="fname" placeholder="First Name" required
+             style="width:100%; padding:14px; border-radius:10px; border:1px solid #e6e8ef;">
+    </div>
 
-                  <div class="col-md-6 mb-20">
-                    <input type="email" name="email" placeholder="Email" required
-                           style="width:100%; padding:14px; border-radius:10px; border:1px solid #e6e8ef;">
-                  </div>
+    <div class="col-md-6 mb-20">
+      <input type="text" name="lname" placeholder="Last Name" required
+             style="width:100%; padding:14px; border-radius:10px; border:1px solid #e6e8ef;">
+    </div>
 
-                  <div class="col-md-6 mb-20">
-                    <input type="tel" name="phone" placeholder="Phone (optional)"
-                           style="width:100%; padding:14px; border-radius:10px; border:1px solid #e6e8ef;">
-                  </div>
+    <div class="col-md-6 mb-20">
+      <input type="email" name="email" placeholder="Email" required
+             style="width:100%; padding:14px; border-radius:10px; border:1px solid #e6e8ef;">
+    </div>
 
-                  <div class="col-12 mb-20">
-                    <label style="display:block; font-weight:600; margin-bottom:8px;">Select a Webinar Topic</label>
-                    <select name="webinar_topic" required
-                            style="width:100%; padding:14px; border-radius:10px; border:1px solid #e6e8ef;">
-                      <option value="" selected>Choose one</option>
-                      <option value="Cloud Fundamentals (AWS)">Cloud Fundamentals (AWS)</option>
-                      <option value="Cybersecurity: SOC 101">Cybersecurity: SOC 101</option>
-                      <option value="DevOps & Automation">DevOps & Automation</option>
-                      <option value="AI Workforce Readiness">AI Workforce Readiness</option>
-                      <option value="Not Sure Yet">Not Sure Yet</option>
-                    </select>
-                  </div>
+    <div class="col-md-6 mb-20">
+      <input type="tel" name="phone" placeholder="Phone (optional)"
+             style="width:100%; padding:14px; border-radius:10px; border:1px solid #e6e8ef;">
+    </div>
 
-                  <div class="col-12 mb-20">
-                    <label style="display:block; font-weight:600; margin-bottom:8px;">I am a</label>
-                    <select name="attendee_type"
-                            style="width:100%; padding:14px; border-radius:10px; border:1px solid #e6e8ef;">
-                      <option value="" selected>Select (optional)</option>
-                      <option value="Beginner / Career Changer">Beginner / Career Changer</option>
-                      <option value="IT Professional (Upskilling)">IT Professional (Upskilling)</option>
-                      <option value="Workforce-funded learner (TWC/WIOA)">Workforce-funded learner (TWC/WIOA)</option>
-                      <option value="Employer / Sponsor">Employer / Sponsor</option>
-                    </select>
-                  </div>
+    <div class="col-12 mb-20">
+      <label style="display:block; font-weight:600; margin-bottom:8px;">Select a Webinar Topic</label>
+      <select name="webinar_topic" required
+              style="width:100%; padding:14px; border-radius:10px; border:1px solid #e6e8ef;">
+        <option value="" selected>Choose one</option>
+        <option value="Cloud Fundamentals (AWS)">Cloud Fundamentals (AWS)</option>
+        <option value="Cybersecurity: SOC 101">Cybersecurity: SOC 101</option>
+        <option value="DevOps & Automation">DevOps & Automation</option>
+        <option value="AI Workforce Readiness">AI Workforce Readiness</option>
+        <option value="Not Sure Yet">Not Sure Yet</option>
+      </select>
+    </div>
 
-                  <div class="col-12 mb-20">
-                    <textarea name="questions" rows="4"
-                              placeholder="Any questions you'd like us to address? (optional)"
-                              style="width:100%; padding:14px; border-radius:10px; border:1px solid #e6e8ef;"></textarea>
-                  </div>
+    <div class="col-12 mb-20">
+      <label style="display:block; font-weight:600; margin-bottom:8px;">I am a</label>
+      <select name="attendee_type"
+              style="width:100%; padding:14px; border-radius:10px; border:1px solid #e6e8ef;">
+        <option value="" selected>Select (optional)</option>
+        <option value="Beginner / Career Changer">Beginner / Career Changer</option>
+        <option value="IT Professional (Upskilling)">IT Professional (Upskilling)</option>
+        <option value="Workforce-funded learner (TWC/WIOA)">Workforce-funded learner (TWC/WIOA)</option>
+        <option value="Employer / Sponsor">Employer / Sponsor</option>
+      </select>
+    </div>
 
-                  <!-- Turnstile must be inside form -->
-                  <div class="col-12 mb-20">
-                    <div class="cf-turnstile" data-sitekey="0x4AAAAAACY-kc97ZsqBWIQa"></div>
-                  </div>
+    <div class="col-12 mb-20">
+      <textarea name="questions" rows="4"
+                placeholder="Any questions you'd like us to address? (optional)"
+                style="width:100%; padding:14px; border-radius:10px; border:1px solid #e6e8ef;"></textarea>
+    </div>
 
-                  <div class="col-12">
-                    <button type="submit" class="e-btn w-100">Register <i class="fa fa-arrow-right"></i></button>
-                  </div>
+    <!-- Turnstile must be inside form -->
+    <div class="col-12 mb-20">
+      <div class="cf-turnstile" data-sitekey="0x4AAAAAACY-kc97ZsqBWIQa"></div>
+    </div>
 
-                </div>
-              </form>
+    <div class="col-12">
+      <button type="submit" class="e-btn w-100">Register <i class="fa fa-arrow-right"></i></button>
+    </div>
+
+  </div>
+</form>
+
+<script>
+  (function () {
+    const form = document.getElementById('cteWebinarRegisterForm');
+    if (!form) return;
+
+    form.addEventListener('submit', function () {
+      const v = (name) => (form.querySelector(`[name="${name}"]`)?.value || '').trim();
+
+      const fname = v('fname');
+      const lname = v('lname');
+      const topic = v('webinar_topic');
+      const attendee = v('attendee_type');
+      const questions = v('questions');
+
+      // Bridge fields expected by contact.js
+      document.getElementById('webinarFirstName').value = fname;
+      document.getElementById('webinarLastName').value  = lname;
+      document.getElementById('webinarEvent').value     = topic || "Webinar Registration";
+
+      document.getElementById('webinarMessage').value =
+        "Webinar Registration\n\n" +
+        `Topic: ${topic || "(not selected)"}\n` +
+        (attendee ? `Attendee Type: ${attendee}\n` : "") +
+        (questions ? `Questions:\n${questions}\n` : "");
+    });
+  })();
+</script>
+
+              <!-- end-->
 
               <p class="mt-15" style="font-size: 13px; opacity: 0.9;">
                 By registering, you agree to receive webinar emails. You can unsubscribe anytime.

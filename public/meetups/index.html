@@ -336,110 +336,153 @@
               <h3 class="mb-15">Speaker Application</h3>
 
               <!-- Clean: posts to ONE endpoint /api/contact -->
-              <form method="POST" action="/api/contact" id="cteMeetupSpeakerForm">
-                <!-- Let contact.js route and format email -->
-                <input type="hidden" name="form_type" value="meetup">
+             <form method="POST" action="/api/contact" id="cteMeetupSpeakerForm">
+  <!-- contact.js routes off this -->
+  <input type="hidden" name="form_type" value="meetup">
 
-                <div class="row">
-                  <div class="col-md-6 mb-20">
-                    <input type="text" name="fname" placeholder="First Name" required
-                           style="width:100%; padding:14px; border-radius:10px; border:1px solid #e6e8ef;">
-                  </div>
-                  <div class="col-md-6 mb-20">
-                    <input type="text" name="lname" placeholder="Last Name" required
-                           style="width:100%; padding:14px; border-radius:10px; border:1px solid #e6e8ef;">
-                  </div>
+  <!-- We'll pack everything into message (since contact.js expects message in some branches) -->
+  <textarea name="message" id="meetupMessage" style="display:none;"></textarea>
 
-                  <div class="col-md-6 mb-20">
-                    <input type="email" name="email" placeholder="Email" required
-                           style="width:100%; padding:14px; border-radius:10px; border:1px solid #e6e8ef;">
-                  </div>
-                  <div class="col-md-6 mb-20">
-                    <input type="tel" name="phone" placeholder="Phone (optional)"
-                           style="width:100%; padding:14px; border-radius:10px; border:1px solid #e6e8ef;">
-                  </div>
+  <div class="row">
+    <div class="col-md-6 mb-20">
+      <input type="text" name="first_name" placeholder="First Name" required
+             style="width:100%; padding:14px; border-radius:10px; border:1px solid #e6e8ef;">
+    </div>
+    <div class="col-md-6 mb-20">
+      <input type="text" name="last_name" placeholder="Last Name" required
+             style="width:100%; padding:14px; border-radius:10px; border:1px solid #e6e8ef;">
+    </div>
 
-                  <div class="col-md-6 mb-20">
-                    <input type="text" name="company" placeholder="Company (optional)"
-                           style="width:100%; padding:14px; border-radius:10px; border:1px solid #e6e8ef;">
-                  </div>
-                  <div class="col-md-6 mb-20">
-                    <input type="text" name="title" placeholder="Job Title (optional)"
-                           style="width:100%; padding:14px; border-radius:10px; border:1px solid #e6e8ef;">
-                  </div>
+    <div class="col-md-6 mb-20">
+      <input type="email" name="email" placeholder="Email" required
+             style="width:100%; padding:14px; border-radius:10px; border:1px solid #e6e8ef;">
+    </div>
+    <div class="col-md-6 mb-20">
+      <input type="tel" name="phone" placeholder="Phone (optional)"
+             style="width:100%; padding:14px; border-radius:10px; border:1px solid #e6e8ef;">
+    </div>
 
-                  <div class="col-12 mb-20">
-                    <input type="url" name="linkedin" placeholder="LinkedIn URL (optional)"
-                           style="width:100%; padding:14px; border-radius:10px; border:1px solid #e6e8ef;">
-                  </div>
+    <div class="col-md-6 mb-20">
+      <input type="text" name="company" placeholder="Company (optional)"
+             style="width:100%; padding:14px; border-radius:10px; border:1px solid #e6e8ef;">
+    </div>
+    <div class="col-md-6 mb-20">
+      <input type="text" name="title" placeholder="Job Title (optional)"
+             style="width:100%; padding:14px; border-radius:10px; border:1px solid #e6e8ef;">
+    </div>
 
-                  <div class="col-12 mb-20">
-                    <input type="url" name="website" placeholder="Website / Speaker Page (optional)"
-                           style="width:100%; padding:14px; border-radius:10px; border:1px solid #e6e8ef;">
-                  </div>
+    <div class="col-12 mb-20">
+      <input type="url" name="linkedin" placeholder="LinkedIn URL (optional)"
+             style="width:100%; padding:14px; border-radius:10px; border:1px solid #e6e8ef;">
+    </div>
 
-                  <div class="col-12 mb-20">
-                    <input type="text" name="talk_title" placeholder="Talk Title" required
-                           style="width:100%; padding:14px; border-radius:10px; border:1px solid #e6e8ef;">
-                  </div>
+    <div class="col-12 mb-20">
+      <input type="url" name="website" placeholder="Website / Speaker Page (optional)"
+             style="width:100%; padding:14px; border-radius:10px; border:1px solid #e6e8ef;">
+    </div>
 
-                  <div class="col-12 mb-20">
-                    <textarea name="talk_abstract" rows="5" required
-                              placeholder="Talk Abstract (what attendees will learn, key points, outcomes)"
-                              style="width:100%; padding:14px; border-radius:10px; border:1px solid #e6e8ef;"></textarea>
-                  </div>
+    <div class="col-12 mb-20">
+      <input type="text" name="talk_title" placeholder="Talk Title" required
+             style="width:100%; padding:14px; border-radius:10px; border:1px solid #e6e8ef;">
+    </div>
 
-                  <div class="col-md-6 mb-20">
-                    <label style="display:block; font-weight:600; margin-bottom:8px;">Level</label>
-                    <select name="talk_level" style="width:100%; padding:14px; border-radius:10px; border:1px solid #e6e8ef;">
-                      <option value="" selected>Select</option>
-                      <option value="Beginner">Beginner</option>
-                      <option value="Intermediate">Intermediate</option>
-                      <option value="Advanced">Advanced</option>
-                    </select>
-                  </div>
+    <div class="col-12 mb-20">
+      <textarea name="talk_abstract" rows="5" required
+                placeholder="Talk Abstract (what attendees will learn, key points, outcomes)"
+                style="width:100%; padding:14px; border-radius:10px; border:1px solid #e6e8ef;"></textarea>
+    </div>
 
-                  <div class="col-md-6 mb-20">
-                    <label style="display:block; font-weight:600; margin-bottom:8px;">Talk Length</label>
-                    <select name="talk_length" style="width:100%; padding:14px; border-radius:10px; border:1px solid #e6e8ef;">
-                      <option value="" selected>Select</option>
-                      <option value="20–30 minutes">20–30 minutes</option>
-                      <option value="45 minutes (deep dive)">45 minutes (deep dive)</option>
-                      <option value="60 minutes (workshop)">60 minutes (workshop)</option>
-                    </select>
-                  </div>
+    <div class="col-md-6 mb-20">
+      <label style="display:block; font-weight:600; margin-bottom:8px;">Level</label>
+      <select name="talk_level"
+              style="width:100%; padding:14px; border-radius:10px; border:1px solid #e6e8ef;">
+        <option value="" selected>Select</option>
+        <option value="Beginner">Beginner</option>
+        <option value="Intermediate">Intermediate</option>
+        <option value="Advanced">Advanced</option>
+      </select>
+    </div>
 
-                  <div class="col-md-6 mb-20">
-                    <label style="display:block; font-weight:600; margin-bottom:8px;">Format Preference</label>
-                    <select name="format_pref" style="width:100%; padding:14px; border-radius:10px; border:1px solid #e6e8ef;">
-                      <option value="" selected>Select</option>
-                      <option value="In-person">In-person</option>
-                      <option value="Virtual">Virtual</option>
-                      <option value="Either">Either</option>
-                    </select>
-                  </div>
+    <div class="col-md-6 mb-20">
+      <label style="display:block; font-weight:600; margin-bottom:8px;">Talk Length</label>
+      <select name="talk_length"
+              style="width:100%; padding:14px; border-radius:10px; border:1px solid #e6e8ef;">
+        <option value="" selected>Select</option>
+        <option value="20–30 minutes">20–30 minutes</option>
+        <option value="45 minutes (deep dive)">45 minutes (deep dive)</option>
+        <option value="60 minutes (workshop)">60 minutes (workshop)</option>
+      </select>
+    </div>
 
-                  <div class="col-md-6 mb-20">
-                    <input type="text" name="availability" placeholder="Availability (e.g., Feb–Apr, weekdays evenings)"
-                           style="width:100%; padding:14px; border-radius:10px; border:1px solid #e6e8ef;">
-                  </div>
+    <div class="col-md-6 mb-20">
+      <label style="display:block; font-weight:600; margin-bottom:8px;">Format Preference</label>
+      <select name="format_pref"
+              style="width:100%; padding:14px; border-radius:10px; border:1px solid #e6e8ef;">
+        <option value="" selected>Select</option>
+        <option value="In-person">In-person</option>
+        <option value="Virtual">Virtual</option>
+        <option value="Either">Either</option>
+      </select>
+    </div>
 
-                  <div class="col-12 mb-20">
-                    <textarea name="prior_talks" rows="4"
-                              placeholder="Brief speaker bio or links to prior talks (optional)"
-                              style="width:100%; padding:14px; border-radius:10px; border:1px solid #e6e8ef;"></textarea>
-                  </div>
+    <div class="col-md-6 mb-20">
+      <input type="text" name="availability" placeholder="Availability (e.g., Feb–Apr, weekdays evenings)"
+             style="width:100%; padding:14px; border-radius:10px; border:1px solid #e6e8ef;">
+    </div>
 
-                  <!-- Turnstile must be inside form -->
-                  <div class="col-12 mb-20">
-                    <div class="cf-turnstile" data-sitekey="0x4AAAAAACY-kc97ZsqBWIQa"></div>
-                  </div>
+    <div class="col-12 mb-20">
+      <textarea name="prior_talks" rows="4"
+                placeholder="Brief speaker bio or links to prior talks (optional)"
+                style="width:100%; padding:14px; border-radius:10px; border:1px solid #e6e8ef;"></textarea>
+    </div>
 
-                  <div class="col-12">
-                    <button type="submit" class="e-btn w-100">Submit Speaker Application <i class="fa fa-arrow-right"></i></button>
-                  </div>
-                </div>
-              </form>
+    <!-- Turnstile -->
+    <div class="col-12 mb-20">
+      <div class="cf-turnstile" data-sitekey="0x4AAAAAACY-kc97ZsqBWIQa"></div>
+    </div>
+
+    <div class="col-12">
+      <button type="submit" class="e-btn w-100">
+        Submit Speaker Application <i class="fa fa-arrow-right"></i>
+      </button>
+    </div>
+  </div>
+</form>
+
+<script>
+  (function () {
+    const form = document.getElementById('cteMeetupSpeakerForm');
+    if (!form) return;
+
+    form.addEventListener('submit', function () {
+      const v = (name) => (form.querySelector(`[name="${name}"]`)?.value || '').trim();
+
+      const msg =
+        "Meetup Speaker Application\n\n" +
+        `Name: ${v('first_name')} ${v('last_name')}\n` +
+        `Email: ${v('email')}\n` +
+        (v('phone') ? `Phone: ${v('phone')}\n` : "") +
+        (v('company') ? `Company: ${v('company')}\n` : "") +
+        (v('title') ? `Job Title: ${v('title')}\n` : "") +
+        (v('linkedin') ? `LinkedIn: ${v('linkedin')}\n` : "") +
+        (v('website') ? `Website: ${v('website')}\n` : "") +
+        "\n--- Talk ---\n" +
+        `Title: ${v('talk_title')}\n` +
+        `Level: ${v('talk_level') || '(not provided)'}\n` +
+        `Length: ${v('talk_length') || '(not provided)'}\n` +
+        `Format: ${v('format_pref') || '(not provided)'}\n` +
+        (v('availability') ? `Availability: ${v('availability')}\n` : "") +
+        "\nAbstract:\n" + (v('talk_abstract') || "(not provided)") + "\n\n" +
+        (v('prior_talks') ? `Bio / Prior Talks:\n${v('prior_talks')}\n` : "");
+
+      document.getElementById('meetupMessage').value = msg;
+    });
+  })();
+</script>
+
+
+
+              <!-- end -->
 
               <p class="mt-15" style="font-size: 13px; opacity: 0.9;">
                 Note: Submitting an application does not guarantee selection. We’ll contact you if your topic is a fit.
