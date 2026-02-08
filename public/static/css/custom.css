@@ -1,6 +1,11 @@
-.header__left .logo a img{width: 80px;
-    position: absolute;
-    top: 10px;}
+/* --- LOGO: keep it in normal flow (fixes alignment + overlap) --- */
+.header__left .logo { position: relative; }
+.header__left .logo a img{
+  width: 64px;          /* adjust if needed */
+  height: auto;
+  position: static;     /* IMPORTANT */
+  display: block;
+}
 
     .blogimg{min-height: 500px !important;}
 
@@ -289,5 +294,132 @@ box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 #header-sticky.header--solid::before {
   /* remove gradient when solid */
   background: transparent;
+}
+
+
+
+/* =========================================================
+   GLOBAL HEADER (works on ALL pages)
+   ========================================================= */
+
+/* Keep header above content */
+#header-sticky.header__area{
+  position: fixed !important;
+  top: 0; left: 0;
+  width: 100%;
+  z-index: 99999 !important;
+  background: transparent !important; /* no thick black bar */
+}
+
+/* Only a subtle gradient behind the header content (not the whole hero) */
+#header-sticky.header__area::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  height: 84px; /* header band height */
+  background: linear-gradient(
+    to bottom,
+    rgba(10,14,24,0.70),
+    rgba(10,14,24,0.25),
+    rgba(10,14,24,0.00)
+  );
+  pointer-events:none;
+}
+
+/* Ensure header content sits above the gradient */
+#header-sticky.header__area .container-fluid,
+#header-sticky.header__area .header__left,
+#header-sticky.header__area .header__right{
+  position: relative;
+  z-index: 2;
+}
+
+/* Desktop nav links readable */
+#header-sticky.header__area .main-menu nav ul li a{
+  color:#fff !important;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.45);
+  font-weight: 600;
+}
+
+/* Dropdown readability */
+#header-sticky.header__area .submenu{
+  background: rgba(10,14,24,0.96) !important;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+#header-sticky.header__area .submenu li a{
+  color:#fff !important;
+  text-shadow:none;
+}
+
+/* -------------------------
+   MOBILE: ALWAYS show hamburger
+   ------------------------- */
+@media (max-width: 991px){
+  .main-menu{ display:none !important; }            /* hide desktop menu */
+  .sidebar__menu{ display:block !important; }      /* show toggle container */
+  #sidebar-toggle{ display:block !important; }     /* show the actual toggle */
+}
+
+/* Make hamburger visible even on light backgrounds */
+.sidebar-toggle-btn .line{
+  background: #ffffff !important; /* visible over hero */
+}
+@media (max-width: 991px){
+  /* if your header area is light on some pages, force contrast */
+  #header-sticky.header__area::before{
+    background: rgba(10,14,24,0.55); /* slightly stronger on mobile */
+  }
+}
+
+/* Make sure the toggle is clickable */
+#sidebar-toggle{
+  position: relative;
+  z-index: 100000 !important;
+  cursor: pointer;
+}
+
+/* Fix overlay stacking so it doesn't block clicks */
+.body-overlay{
+  z-index: 99998 !important;
+}
+.sidebar__area{
+  z-index: 99999 !important;
+}
+
+/* -------------------------
+   HERO BACKGROUND (images)
+   ------------------------- */
+.page__title-area{
+  background-repeat:no-repeat;
+  background-position:center center;
+  background-size: cover;             /* desktop: looks premium */
+}
+
+/* Mobile: show full image (no awkward crop) */
+@media (max-width: 767px){
+  .page__title-area{
+    background-size: contain !important;   /* show full image */
+    background-position: center top !important;
+    background-color: #0b0f19;            /* letterbox fill */
+  }
+}
+
+/* Give hero enough height so image doesn’t feel chopped */
+.page__title-height{
+  min-height: clamp(260px, 36vh, 520px);
+}
+
+/* Prevent content from hiding under fixed header */
+body{
+  padding-top: 84px; /* match header band height */
+}
+
+
+#header-sticky.header--solid{
+  background: rgba(10,14,24,0.92) !important;
+  backdrop-filter: blur(10px);
+}
+#header-sticky.header--solid::before{
+  background: transparent !important; /* remove gradient when solid */
 }
 

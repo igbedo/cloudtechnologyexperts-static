@@ -101,3 +101,17 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("scroll", onScroll, { passive: true });
 });
 
+// Solid header after scroll (global)
+(function () {
+  const header = document.getElementById("header-sticky");
+  if (!header) return;
+
+  const onScroll = () => {
+    if (window.scrollY > 10) header.classList.add("header--solid");
+    else header.classList.remove("header--solid");
+  };
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+})();
+
