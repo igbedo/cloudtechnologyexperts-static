@@ -34,3 +34,51 @@ $(".list-group-item").click(function() {
   }
 })();
 
+
+(function () {
+  function ready(fn) {
+    if (document.readyState !== "loading") fn();
+    else document.addEventListener("DOMContentLoaded", fn);
+  }
+
+  ready(function () {
+    const sidebar = document.querySelector(".sidebar__area");
+    const overlay = document.querySelector(".body-overlay");
+    const openBtn = document.getElementById("sidebar-toggle");
+    const closeBtn = document.getElementById("sidebar__close-btn");
+
+    if (!sidebar || !overlay || !openBtn) return;
+
+    function openSidebar() {
+      sidebar.classList.add("is-open");
+      overlay.classList.add("is-open");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeSidebar() {
+      sidebar.classList.remove("is-open");
+      overlay.classList.remove("is-open");
+      document.body.style.overflow = "";
+    }
+
+    openBtn.addEventListener("click", function (e) {
+      e.preventDefault();
+      openSidebar();
+    });
+
+    if (closeBtn) {
+      closeBtn.addEventListener("click", function (e) {
+        e.preventDefault();
+        closeSidebar();
+      });
+    }
+
+    overlay.addEventListener("click", closeSidebar);
+
+    // Close on ESC
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") closeSidebar();
+    });
+  });
+})();
+
