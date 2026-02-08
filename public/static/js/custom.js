@@ -88,3 +88,16 @@ $('#mobile-menu').meanmenu({
   meanScreenWidth: "991"
 });
 
+document.addEventListener("DOMContentLoaded", () => {
+  const header = document.getElementById("header-sticky");
+  if (!header) return;
+
+  const onScroll = () => {
+    if (window.scrollY > 30) header.classList.add("header--solid");
+    else header.classList.remove("header--solid");
+  };
+
+  onScroll();
+  window.addEventListener("scroll", onScroll, { passive: true });
+});
+
