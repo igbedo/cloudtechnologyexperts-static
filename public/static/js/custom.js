@@ -115,3 +115,10 @@ document.addEventListener("DOMContentLoaded", () => {
   onScroll();
 })();
 
+(function () {
+  // Detect if page has a hero section with data-background
+  const hasHero = document.querySelector('.page__title-area[data-background]');
+  if (hasHero) document.body.classList.add('has-hero');
+  else document.body.classList.add('no-hero');
+})();
+

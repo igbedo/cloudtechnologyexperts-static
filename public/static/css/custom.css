@@ -1,15 +1,19 @@
 /* --- LOGO: keep it in normal flow (fixes alignment + overlap) --- */
 .header__left .logo { position: relative; }
+
 .header__left .logo a img{
-  width: 64px;          /* adjust if needed */
+  width: 80px;          /* adjust if needed */
   height: auto;
   position: static;     /* IMPORTANT */
   display: block;
 }
 
+@media (max-width: 991px){
+  .header__left .logo img{ width: 64px; }
+}
     .blogimg{min-height: 500px !important;}
 
-    .header__category {margin-left: 150px;}    
+ /*   .header__category {margin-left: 150px;} */    
 
 /* width */
 ::-webkit-scrollbar {
@@ -458,5 +462,213 @@ body{
 
 .page__title-height{
   min-height: 420px; /* give the hero more breathing room on desktop */
+}
+
+
+/* Base header behavior */
+#header-sticky.header__area{
+  position: fixed !important;
+  top: 0; left: 0;
+  width: 100%;
+  z-index: 99999 !important;
+  background: transparent !important;
+}
+
+/* HERO pages: subtle readability overlay (NOT a big black bar) */
+body.has-hero #header-sticky.header__area::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  height: 88px;                /* only header height */
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.55),
+    rgba(0,0,0,0.20),
+    rgba(0,0,0,0.00)
+  );
+  pointer-events:none;
+}
+
+/* Home (no hero): no overlay at all */
+body.no-hero #header-sticky.header__area::before{
+  content:none !important;
+}
+
+/* Keep header content above the overlay */
+#header-sticky.header__area .container-fluid{
+  position: relative;
+  z-index: 2;
+}
+
+.page__title-area{
+  background-repeat:no-repeat;
+  background-size: cover;
+  background-position: var(--hero-pos, center);
+}
+
+/* Desktop: reduce “awkward crop” by raising the focus point slightly */
+@media (min-width: 992px){
+  .page__title-area{
+    min-height: 420px;                 /* gives the image room */
+    background-position: var(--hero-pos, 50% 35%);
+  }
+}
+
+/* Mobile slide-out menu should be light and clean */
+.mean-container .mean-nav,
+.sidebar__area,
+.sidebar__content{
+  background: #ffffff !important;
+}
+
+/* Mobile menu links */
+.mean-container .mean-nav ul li a,
+.sidebar__content a{
+  color: #111 !important;
+}
+
+/* Hamburger lines visible on light header */
+.sidebar-toggle-btn .line{
+  background:#111 !important;
+}
+
+/* BUT on hero pages, keep hamburger white */
+body.has-hero .sidebar-toggle-btn .line{
+  background:#fff !important;
+}
+
+
+/* Prevent fixed header covering content */
+body{
+  padding-top: 88px;
+}
+@media (max-width: 991px){
+  body{ padding-top: 72px; }
+}
+
+/* Home hero mobile cleanup */
+@media (max-width: 480px){
+  h1, .hero-title{
+    font-size: 34px !important;
+    line-height: 1.15 !important;
+  }
+  .hero-subtitle, p{
+    font-size: 16px !important;
+    line-height: 1.45 !important;
+  }
+}
+
+/* =========================================================
+   HEADER OVERLAY RULES (GLOBAL) + HOME EXCEPTION
+   ========================================================= */
+
+/* Always keep header above content */
+#header-sticky.header__area{
+  position: fixed !important;
+  top: 0; left: 0;
+  width: 100%;
+  z-index: 99999 !important;
+  background: transparent !important;
+}
+
+/* Default: NO overlay (so Home stays clean) */
+#header-sticky.header__area::before{
+  content: none !important;
+}
+
+/* Only pages with hero images should get the overlay */
+body.has-hero #header-sticky.header__area::before{
+  content:"" !important;
+  position:absolute;
+  inset:0;
+  height: 88px;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.55),
+    rgba(0,0,0,0.20),
+    rgba(0,0,0,0.00)
+  );
+  pointer-events:none;
+}
+
+/* Home page: force no overlay + no dark background */
+body.is-home #header-sticky.header__area{
+  background: transparent !important;
+}
+body.is-home #header-sticky.header__area::before{
+  content: none !important;
+}
+
+/* Ensure header content sits above overlay */
+#header-sticky.header__area .container-fluid{
+  position: relative;
+  z-index: 2;
+}
+
+/* =========================================================
+   MOBILE MENU: ALWAYS SHOW HAMBURGER ON PORTRAIT
+   ========================================================= */
+
+@media (max-width: 991px){
+  /* Hide desktop menu */
+  .main-menu{ display:none !important; }
+
+  /* Force hamburger visible */
+  .sidebar__menu,
+  #sidebar-toggle{
+    display:block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  /* Keep it clickable */
+  #sidebar-toggle{
+    position: relative;
+    z-index: 100000 !important;
+  }
+}
+
+/* =========================================================
+   LOGO ALIGNMENT (GLOBAL)
+   ========================================================= */
+
+.header__left .logo img{
+  width: 80px;
+  height: auto;
+  display:block;
+  position: static !important;
+}
+
+@media (max-width: 991px){
+  .header__left .logo img{ width: 64px; }
+}
+
+
+/* =========================================================
+   HERO BACKGROUND BEHAVIOR
+   ========================================================= */
+
+.page__title-area{
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 35%;   /* show slightly more top */
+}
+
+@media (min-width: 992px){
+  .page__title-area{
+    min-height: 420px;            /* gives image breathing room */
+  }
+}
+
+
+/* =========================================================
+   FIXED HEADER SPACING (GLOBAL)
+   ========================================================= */
+body{ padding-top: 88px; }
+@media (max-width: 991px){ body{ padding-top: 72px; } }
+
+/* Home: often needs slightly more breathing room */
+@media (max-width: 480px){
+  body.is-home{ padding-top: 78px; }
 }
 
