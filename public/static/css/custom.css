@@ -423,3 +423,40 @@ body{
   background: transparent !important; /* remove gradient when solid */
 }
 
+/* Make sure hamburger shows on mobile ALWAYS */
+@media (max-width: 1199px){
+  .sidebar__menu{ display:block !important; }
+  #sidebar-toggle{ display:block !important; }
+}
+
+/* Make the lines visible */
+.sidebar-toggle-btn .line{
+  display:block;
+  width: 26px;
+  height: 2px;
+  margin: 6px 0;
+  background: #fff !important;
+}
+
+/* Ensure it stays above hero overlays */
+#header-sticky{ z-index: 99999 !important; }
+#sidebar-toggle{ z-index: 100000 !important; position: relative; }
+
+/* Home page: no dark header overlay */
+.is-home #header-sticky.header__area::before{
+  display:none !important;
+}
+.is-home #header-sticky.header__area{
+  background: transparent !important;
+}
+
+.page__title-area{
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center 25%; /* instead of dead-center */
+}
+
+.page__title-height{
+  min-height: 420px; /* give the hero more breathing room on desktop */
+}
+
