@@ -183,3 +183,14 @@ box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   color: #111 !important;
 }
 
+/* Make header readable over busy hero images */
+.header__transparent {
+  background: rgba(0,0,0,0.35);
+  backdrop-filter: blur(6px);
+}
+
+.header__transparent .main-menu ul li a,
+.header__transparent .header__btn a {
+  color: #fff !important;
+}
+
