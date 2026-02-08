@@ -390,12 +390,16 @@
             <div class="contact__wrapper" style="background:#fff; border-radius:16px; padding:30px; box-shadow: 0 20px 60px rgba(0,0,0,0.12);">
               <h3 class="mb-15">Your First Step to a Great Future</h3>
 
-              <form method="POST" action="/api/contact" id="careerday">
+<form method="POST" action="/api/contact" id="careerdayForm">
+  <!-- IMPORTANT: route to the right handler branch -->
+  <input type="hidden" name="form_type" value="careerday">
+
   <div class="row">
     <div class="col-md-6 mb-20">
       <input type="text" name="first_name" placeholder="First Name" required
              style="width:100%; padding:14px; border-radius:10px; border:1px solid #e6e8ef;">
     </div>
+
     <div class="col-md-6 mb-20">
       <input type="text" name="last_name" placeholder="Last Name" required
              style="width:100%; padding:14px; border-radius:10px; border:1px solid #e6e8ef;">
@@ -405,8 +409,9 @@
       <input type="email" name="email" placeholder="Email" required
              style="width:100%; padding:14px; border-radius:10px; border:1px solid #e6e8ef;">
     </div>
+
     <div class="col-md-6 mb-20">
-      <input type="tel" name="telephone" placeholder="Phone" required
+      <input type="tel" name="telephone" placeholder="Phone"
              style="width:100%; padding:14px; border-radius:10px; border:1px solid #e6e8ef;">
     </div>
 
@@ -428,7 +433,7 @@
         style="width:100%; padding:14px; border-radius:10px; border:1px solid #e6e8ef;"></textarea>
     </div>
 
-    <!-- Required by contact.js -->
+    <!-- These are harmless for careerday branch (it ignores them), but fine to keep consistent -->
     <input type="hidden" name="subject" value="Career Day Registration">
     <textarea name="message" id="careerdayMessage" style="display:none;"></textarea>
 
@@ -438,12 +443,13 @@
     </div>
 
     <div class="col-12">
-      <button type="submit" class="e-btn w-100">Register <i class="fa fa-arrow-right"></i></button>
+      <button type="submit" class="e-btn w-100">
+        Register <i class="fa fa-arrow-right"></i>
+      </button>
     </div>
   </div>
 </form>
 
-<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 <script>
   (function () {
     const form = document.getElementById('careerdayForm');
@@ -460,6 +466,7 @@
     });
   })();
 </script>
+
 
 
               <p class="mt-15" style="font-size: 13px; opacity: 0.9;">
