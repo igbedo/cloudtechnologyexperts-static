@@ -252,4 +252,3 @@ export async function onRequestPost(context) {
   // 5) Redirect to the right thank-you page
   return Response.redirect(`${new URL(request.url).origin}${redirectPath}`, 303);
 }
-
