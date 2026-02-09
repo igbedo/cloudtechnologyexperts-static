@@ -122,3 +122,9 @@ document.addEventListener("DOMContentLoaded", () => {
   else document.body.classList.add('no-hero');
 })();
 
+
+(function () {
+  const hasHero = document.querySelector('.page__title-area[data-background]');
+  if (hasHero) document.body.classList.add('has-hero');
+})();
+

@@ -253,8 +253,3 @@ export async function onRequestPost(context) {
   return Response.redirect(`${new URL(request.url).origin}${redirectPath}`, 303);
 }
 
-(function () {
-  const hasHero = document.querySelector('.page__title-area[data-background]');
-  if (hasHero) document.body.classList.add('has-hero');
-})();
-
