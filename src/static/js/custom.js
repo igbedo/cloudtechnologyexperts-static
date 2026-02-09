@@ -128,3 +128,35 @@ document.addEventListener("DOMContentLoaded", () => {
   if (hasHero) document.body.classList.add('has-hero');
 })();
 
+
+<script>
+  (function () {
+    const btn = document.getElementById('sidebar-toggle') || document.getElementById('cte-sidebar-toggle');
+    const sidebar = document.querySelector('.sidebar__area');
+    const overlay = document.querySelector('.body-overlay');
+    const closeBtn = document.getElementById('sidebar__close-btn');
+
+    if (!btn || !sidebar) return;
+
+    function openMenu() {
+      sidebar.classList.add('is-open');
+      if (overlay) overlay.classList.add('is-open');
+      document.body.classList.add('menu-open');
+    }
+
+    function closeMenu() {
+      sidebar.classList.remove('is-open');
+      if (overlay) overlay.classList.remove('is-open');
+      document.body.classList.remove('menu-open');
+    }
+
+    btn.addEventListener('click', openMenu);
+    btn.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') openMenu();
+    });
+
+    if (closeBtn) closeBtn.addEventListener('click', closeMenu);
+    if (overlay) overlay.addEventListener('click', closeMenu);
+  })();
+</script>
+

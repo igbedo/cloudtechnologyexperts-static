@@ -528,3 +528,9 @@ body:not(.has-hero) #sidebar-toggle::before{
   }
 }
 
+.sidebar__area { right: -320px; transition: right .25s ease; }
+.sidebar__area.is-open { right: 0; }
+
+.body-overlay { opacity: 0; visibility: hidden; transition: .2s; }
+.body-overlay.is-open { opacity: 1; visibility: visible; }
+
