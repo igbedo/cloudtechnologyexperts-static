@@ -77,19 +77,12 @@ box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
    FINAL HEADER + MOBILE MENU (CLEAN, SINGLE SOURCE OF TRUTH)
    ========================================================= */
 
-/* --- Logo: keep aligned and not overlapping --- */
-.header__left .logo { position: relative; }
-.header__left .logo a img{
-  width: 80px;
-  height: auto;
-  position: static !important;
-  display: block;
-}
-@media (max-width: 991px){
-  .header__left .logo a img{ width: 64px; }
-}
+/* =========================================================
+   FINAL HEADER + MENU + HERO FIX (single source of truth)
+   Paste at BOTTOM of custom.css and REMOVE older header/menu blocks
+   ========================================================= */
 
-/* --- Fixed header layout --- */
+/* ---- Header always on top ---- */
 #header-sticky.header__area{
   position: fixed !important;
   top: 0; left: 0;
@@ -98,90 +91,128 @@ box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   background: transparent !important;
 }
 
-/* default: no overlay anywhere */
-#header-sticky.header__area::before{ content: none !important; }
-
-/* ONLY hero pages get a subtle header overlay */
-body.has-hero #header-sticky.header__area::before{
-  content:"" !important;
+/* Subtle “glass” behind header content so laptop menu is readable on any image */
+#header-sticky.header__area::before{
+  content:"";
   position:absolute;
   inset:0;
-  height: 78px; /* header band only */
+  height: 78px;  /* header band only (not a big black bar) */
   background: linear-gradient(
     to bottom,
-    rgba(10,14,24,0.55),
-    rgba(10,14,24,0.12),
+    rgba(10,14,24,0.70),
+    rgba(10,14,24,0.25),
     rgba(10,14,24,0.00)
   );
   pointer-events:none;
 }
 
-/* make header content appear above overlay */
-#header-sticky.header__area .container-fluid{
+/* Header content above overlay */
+#header-sticky.header__area .container-fluid,
+#header-sticky.header__area .header__left,
+#header-sticky.header__area .header__right{
   position: relative;
   z-index: 2;
 }
 
-/* Home page: clean light header (no black bar) */
-body.is-home #header-sticky.header__area{
-  background: rgba(255,255,255,0.92) !important;
-  backdrop-filter: blur(10px);
+/* Desktop menu text (fixes “white on white”) */
+#header-sticky.header__area .main-menu nav ul li a,
+#header-sticky.header__area .header__btn a{
+  color:#fff !important;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.35);
+  font-weight: 600;
 }
-body.is-home #header-sticky.header__area::before{ content:none !important; }
 
-/* Desktop menu colors */
-body.is-home #header-sticky .main-menu nav ul li a{ color:#111 !important; text-shadow:none !important; }
-body.has-hero #header-sticky .main-menu nav ul li a{ color:#fff !important; text-shadow:0 2px 10px rgba(0,0,0,0.35); }
+/* Dropdowns readable */
+#header-sticky.header__area .submenu{
+  background: rgba(10,14,24,0.96) !important;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+#header-sticky.header__area .submenu li a{
+  color:#fff !important;
+  text-shadow:none !important;
+}
 
-/* Apply button stays visible */
-#header-sticky .header__btn .e-btn{ box-shadow: 0 14px 35px rgba(0,0,0,0.18); }
-
-/* --- Hamburger visibility + clickability on mobile --- */
+/* ---- Logo alignment (prevents absolute-position overlap issues) ---- */
+.header__left .logo a img{
+  position: static !important;
+  display: block;
+  width: 80px;
+  height: auto;
+}
 @media (max-width: 991px){
-  .main-menu{ display:none !important; } /* hide desktop menu */
-  .sidebar__menu{ display:block !important; }
+  .header__left .logo a img{ width: 64px; }
+}
+
+/* ---- Fixed header spacing (prevents content hiding under header) ---- */
+body{ padding-top: 78px; }
+@media (max-width: 991px){ body{ padding-top: 70px; } }
+
+/* ---- Mobile: ALWAYS show hamburger (portrait included) ---- */
+@media (max-width: 991px){
+  .main-menu{ display:none !important; }
+
+  .sidebar__menu,
   #sidebar-toggle{
     display:block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  #sidebar-toggle{
     position: relative;
     z-index: 100000 !important;
     cursor: pointer;
   }
 }
 
-/* Hamburger line color: dark on home, white on hero */
-.sidebar-toggle-btn .line{ background:#111 !important; }
-body.has-hero .sidebar-toggle-btn .line{ background:#fff !important; }
-
-/* --- Off-canvas sidebar: always WHITE background with DARK text --- */
-.sidebar__area{ background:#fff !important; }
-.mean-container .mean-nav{ background:#fff !important; }
-.mean-container .mean-nav ul li a{ color:#111 !important; }
-.sidebar__content a{ color:#111 !important; }
-
-/* --- Prevent header from covering page content --- */
-body{ padding-top: 88px; }
-@media (max-width: 991px){ body{ padding-top: 72px; } }
-
-/* --- Hero image behavior: NO "contain" (prevents dark empty block) --- */
-.page__title-area{
-  background-repeat: no-repeat;
-  background-size: cover !important;
-  background-position: 50% 35%;
+/* Hamburger visible on hero */
+.sidebar-toggle-btn .line{
+  display:block;
+  width: 26px;
+  height: 2px;
+  margin: 6px 0;
+  background: #fff !important; /* fixes “black on dark” */
 }
-@media (max-width: 767px){
-  .page__title-area{
-    background-position: center top !important;
-    min-height: 320px;
-  }
+
+/* ---- Mobile slide-out menu should be WHITE with DARK text (readable) ---- */
+.sidebar__area,
+.sidebar__content,
+.mean-container .mean-nav{
+  background: #ffffff !important;
+}
+.sidebar__content a,
+.mean-container .mean-nav ul li a{
+  color: #111 !important;
+  background: #ffffff !important;
+}
+.mean-container .mean-nav ul li a{
+  border-bottom: 1px solid #eee;
+}
+.mean-container .mean-nav ul li a.mean-expand{
+  background: transparent !important;
+  color: #111 !important;
+}
+
+/* ---- HERO image behavior (desktop crop improvement) ---- */
+.page__title-area{
+  background-repeat:no-repeat;
+  background-size: cover;
+  background-position: 50% 30%;  /* shows a bit more top; reduces awkward crop */
 }
 @media (min-width: 992px){
-  .page__title-area{ min-height: 420px; }
+  .page__title-height{ min-height: 420px; }
 }
 
-/* Hero text readability */
-body.has-hero .page__title-wrapper,
-body.has-hero .page__title-wrapper h3,
-body.has-hero .page__title-wrapper p,
-body.has-hero .breadcrumb li,
-body.has-hero .breadcrumb a{ color:#fff !important; }
+/* ---- Reduce the “big gap” under home hero on phones ---- */
+@media (max-width: 767px){
+  /* your pages use lots of pt-90 / mt-110 utility spacing */
+  .pt-90{ padding-top: 40px !important; }
+  .mt-110{ margin-top: 70px !important; }
 
+  /* keep hero from feeling like it has an extra empty block */
+  .page__title-height{ min-height: 300px !important; }
+}
+
+<section class="page__title-area page__title-height page__title-overlay d-flex align-items-center"
+  data-background="/static/img/page-title/cloud_career_pg_title.jpeg"
+  style="background-position: 50% 15%;">
