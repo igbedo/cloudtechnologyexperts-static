@@ -216,3 +216,49 @@ body{ padding-top: 78px; }
 <section class="page__title-area page__title-height page__title-overlay d-flex align-items-center"
   data-background="/static/img/page-title/cloud_career_pg_title.jpeg"
   style="background-position: 50% 15%;">
+
+
+  /* =========================================================
+   HAMBURGER ALWAYS VISIBLE (white on hero images)
+   ========================================================= */
+
+/* Make sure toggle is positioned and clickable */
+#sidebar-toggle.sidebar-toggle-btn{
+  position: relative !important;
+  z-index: 100000 !important;
+  width: 44px;
+  height: 44px;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Hide the old line spans (they’re unreliable with theme overrides) */
+#sidebar-toggle .line{
+  display: none !important;
+}
+
+/* Draw a crisp hamburger icon ourselves */
+#sidebar-toggle::before{
+  content: "";
+  width: 26px;
+  height: 2px;
+  background: #fff;
+  box-shadow:
+    0 8px 0 #fff,
+    0 -8px 0 #fff;
+  border-radius: 2px;
+}
+
+/* If you ever have a light header page, flip to dark automatically */
+body:not(.has-hero) #sidebar-toggle::before{
+  background: #111;
+  box-shadow:
+    0 8px 0 #111,
+    0 -8px 0 #111;
+}
+
+/* Make sure the header overlay doesn't darken the icon itself */
+#header-sticky.header__area::before{
+  pointer-events: none;
+}
