@@ -335,3 +335,33 @@ body:not(.has-hero) #sidebar-toggle::before{
 
 }
 
+
+/* =========================================
+   HOME PAGE – MOBILE HERO GAP FIX (aggressive)
+   ========================================= */
+@media (max-width: 767px){
+
+  /* 1) Stop vertical-centering (this creates big “gap” on short screens) */
+  body.is-home .page__title-area{
+    align-items: flex-start !important;
+  }
+
+  /* 2) Reduce hero min-height so it doesn’t “reserve” space */
+  body.is-home .page__title-height{
+    min-height: 240px !important;     /* try 220–300 */
+    height: auto !important;
+    padding-top: 50px !important;     /* space for fixed header */
+    padding-bottom: 25px !important;
+  }
+
+  /* 3) Kill the mt-110 push-down on mobile */
+  body.is-home .page__title-wrapper.mt-110{
+    margin-top: 10px !important;
+  }
+
+  /* 4) If your global fixed-header padding is too large, reduce ONLY on home mobile */
+  body.is-home{
+    padding-top: 60px !important;     /* was likely 88px */
+  }
+}
+
