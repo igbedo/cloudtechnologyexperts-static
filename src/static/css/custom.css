@@ -365,3 +365,161 @@ body:not(.has-hero) #sidebar-toggle::before{
   }
 }
 
+
+
+
+/* =========================================================
+   MOBILE TOP BAR = DESKTOP STYLE (logo + apply + hamburger)
+   Only affects < 1200px (d-xl-none range)
+   ========================================================= */
+
+@media (max-width: 1199px){
+
+  /* Make header a clean white bar on mobile */
+  #header-sticky.header__area{
+    background: rgba(255,255,255,0.98) !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  /* Remove any dark overlay/gradient bars on mobile */
+  #header-sticky.header__area::before{
+    content: none !important;
+    display: none !important;
+  }
+
+  /* Ensure header row height feels like desktop */
+  #header-sticky .container-fluid{
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  /* Logo sizing + alignment */
+  .header__left .logo img{
+    width: 64px !important;
+    height: auto !important;
+    display: block;
+  }
+
+  /* Keep the right-side items on one line */
+  .header__right{
+    gap: 10px;
+  }
+
+  /* Smaller Apply button on mobile */
+  .e-btn.e-btn-sm{
+    padding: 10px 14px !important;
+    font-size: 14px !important;
+    line-height: 1 !important;
+    border-radius: 10px !important;
+  }
+
+  /* Hamburger button */
+  .cte-hamburger{
+    width: 44px;
+    height: 44px;
+    border: 1px solid rgba(0,0,0,0.12);
+    border-radius: 12px;
+    background: #fff;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+  }
+  .cte-hamburger span{
+    width: 22px;
+    height: 2px;
+    background: #111; /* visible on white */
+    display: block;
+  }
+
+  /* Ensure clickable above overlays */
+  #sidebar-toggle{
+    position: relative;
+    z-index: 100000 !important;
+  }
+}
+
+
+/* Mobile top bar height + vertical alignment */
+@media (max-width: 1199px){
+  #header-sticky.header__area{
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+  }
+
+  /* Make sure the header row items stay centered vertically */
+  #header-sticky .row.align-items-center{
+    min-height: 72px; /* increase slightly if you want more breathing room */
+  }
+
+  /* Prevent logo from being too tall */
+  .header__left .logo img{
+    max-height: 52px !important;
+    width: auto !important;
+  }
+
+  /* Prevent Apply button from being too tall */
+  .header__btn .e-btn{
+    padding: 10px 14px !important;
+    line-height: 1 !important;
+  }
+}
+
+/* Force hamburger to show 3 lines clearly on mobile */
+@media (max-width: 1199px){
+  #sidebar-toggle .line{
+    display: block !important;
+    width: 26px !important;
+    height: 2px !important;
+    margin: 6px 0 !important;
+    background: #111 !important;  /* dark lines on white bar */
+    border-radius: 2px;
+    opacity: 1 !important;
+  }
+
+  /* Ensure the toggle container isn't collapsing */
+  #sidebar-toggle{
+    display: inline-block !important;
+    width: auto !important;
+    height: auto !important;
+  }
+}
+
+
+/* ===========================
+   CLEAN 3-LINE HAMBURGER
+   =========================== */
+
+.cte-hamburger {
+  width: 28px;
+  height: 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  position: relative;
+  z-index: 100000;
+}
+
+/* The 3 lines */
+.cte-hamburger span {
+  display: block;
+  height: 3px;
+  width: 100%;
+  background: #ffffff;   /* change to #111 if header is white */
+  border-radius: 2px;
+}
+
+/* Make sure it shows on mobile */
+@media (max-width: 1199px){
+  .sidebar__menu {
+    display: block !important;
+  }
+}
+
