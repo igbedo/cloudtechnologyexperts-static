@@ -516,4 +516,15 @@ body:not(.has-hero) #sidebar-toggle::before{
   }
 }
 
+/* Hide MeanMenu's injected hamburger */
+.mean-container .meanmenu-reveal {
+  display: none !important;
+}
+
+/* Force cte hamburger visible on the light header bar */
+@media (max-width: 1199px) {
+  .cte-hamburger span {
+    background: #111 !important;
+  }
+}
 
