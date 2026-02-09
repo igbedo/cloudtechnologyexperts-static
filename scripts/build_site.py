@@ -1,135 +1,119 @@
-# scripts/build_site.py
-#
-# OPTION 1 (Cleanest): partials live in /partials, output goes to /public
-#
-# What it does:
-# - Reads /partials/header.html and /partials/footer.html (footer optional)
-# - Scans your site source HTML files (in repo root by default)
-# - Replaces <!--HEADER--> and <!--FOOTER--> placeholders
-# - Writes final pages into /public (preserving relative paths)
-#
-# Usage:
-#   python scripts/build_site.py
-#
-# Notes:
-# - Only processes .html files.
-# - Skips /public, /scripts, /partials, and hidden folders by default.
-# - If a page has no <!--HEADER--> marker, it will NOT inject a header.
-#   (So you control which pages get the global header.)
-
+#!/usr/bin/env python3
 from __future__ import annotations
 
-import argparse
+import shutil
 from pathlib import Path
 
+REPO_ROOT = Path(".").resolve()
 
-DEFAULT_EXCLUDE_DIRS = {
-    "public",
-    "scripts",
-    "partials",
-    ".git",
-    ".github",
-    ".venv",
-    "venv",
-    "__pycache__",
-    "node_modules",
+SRC_DIR = REPO_ROOT / "src"
+OUT_DIR = REPO_ROOT / "public"
+PARTIALS_DIR = REPO_ROOT / "partials"
+
+# Keep these folders in public if they are produced by other builders (like build_blog.py)
+PRESERVE_IN_PUBLIC = {
+    "blogs",       # blog pages
+    "search.json", # if build_blog.py writes it at /public/search.json
+    "templates",   # if build_blog.py writes templates under /public/templates
 }
 
+HEADER_TOKEN = "<!--HEADER-->"
+FOOTER_TOKEN = "<!--FOOTER-->"
 
-def read_optional(path: Path) -> str:
-    return path.read_text(encoding="utf-8") if path.exists() else ""
+def read_text(p: Path) -> str:
+    return p.read_text(encoding="utf-8", errors="ignore")
 
+def write_text(p: Path, s: str) -> None:
+    p.parent.mkdir(parents=True, exist_ok=True)
+    p.write_text(s, encoding="utf-8")
 
-def should_skip_dir(dir_path: Path, exclude_dirs: set[str]) -> bool:
-    name = dir_path.name
-    if name.startswith("."):
-        return True
-    return name in exclude_dirs
+def load_partial(name: str) -> str:
+    p = PARTIALS_DIR / name
+    if not p.exists():
+        return ""
+    return read_text(p)
 
+def inject_partials(html: str, header: str, footer: str) -> str:
+    if HEADER_TOKEN in html:
+        html = html.replace(HEADER_TOKEN, header)
+    if FOOTER_TOKEN in html:
+        html = html.replace(FOOTER_TOKEN, footer)
+    return html
 
-def iter_html_files(src_root: Path, exclude_dirs: set[str]) -> list[Path]:
-    html_files: list[Path] = []
-    for p in src_root.rglob("*.html"):
-        # Skip excluded directories anywhere in the path
-        if any(part in exclude_dirs or part.startswith(".") for part in p.parts):
+def safe_clean_public(out_dir: Path) -> None:
+    """
+    Clean /public except preserved paths. This prevents stale files,
+    but keeps blog output if build_blog.py is generating it.
+    """
+    out_dir.mkdir(parents=True, exist_ok=True)
+
+    for item in out_dir.iterdir():
+        name = item.name
+        if name in PRESERVE_IN_PUBLIC:
             continue
-        # Also skip anything under the output folder if it exists
-        if "public" in p.parts:
+        # If preserving a file (like search.json), skip it
+        if name in PRESERVE_IN_PUBLIC and item.is_file():
             continue
-        html_files.append(p)
-    return sorted(html_files)
 
+        if item.is_dir():
+            shutil.rmtree(item)
+        else:
+            item.unlink()
 
-def inject_partials(content: str, header: str, footer: str) -> str:
-    # Only inject if the marker exists (so you can opt-in per page)
-    if "<!--HEADER-->" in content:
-        content = content.replace("<!--HEADER-->", header)
+def copy_non_html(src_root: Path, out_root: Path) -> int:
+    """
+    Copy everything from src/ to public/ EXCEPT .html files (handled separately).
+    Returns count copied.
+    """
+    count = 0
+    for src_path in src_root.rglob("*"):
+        if src_path.is_dir():
+            continue
+        if src_path.suffix.lower() == ".html":
+            continue
 
-    if "<!--FOOTER-->" in content:
-        content = content.replace("<!--FOOTER-->", footer)
+        rel = src_path.relative_to(src_root)
+        dst_path = out_root / rel
+        dst_path.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(src_path, dst_path)
+        count += 1
+    return count
 
-    return content
+def build_html(src_root: Path, out_root: Path, header: str, footer: str) -> int:
+    """
+    Render HTML files from src/ into public/ with header/footer injection.
+    Returns count rendered.
+    """
+    count = 0
+    for src_html in src_root.rglob("*.html"):
+        rel = src_html.relative_to(src_root)
+        dst_html = out_root / rel
 
+        html = read_text(src_html)
+        html2 = inject_partials(html, header, footer)
 
-def write_out(src_path: Path, src_root: Path, out_root: Path, content: str) -> Path:
-    rel = src_path.relative_to(src_root)
-    out_path = out_root / rel
-    out_path.parent.mkdir(parents=True, exist_ok=True)
-    out_path.write_text(content, encoding="utf-8")
-    return out_path
+        write_text(dst_html, html2)
+        count += 1
+    return count
 
+def main() -> None:
+    if not SRC_DIR.exists():
+        raise SystemExit(f"ERROR: {SRC_DIR} does not exist. Move your site files into src/ first.")
 
-def main() -> int:
-    parser = argparse.ArgumentParser(description="Build static site into /public with header/footer partial injection.")
-    parser.add_argument("--src", default=".", help="Source root (default: repo root)")
-    parser.add_argument("--out", default="public", help="Output directory (default: public)")
-    parser.add_argument("--partials", default="partials", help="Partials directory (default: partials)")
-    parser.add_argument("--header", default="header.html", help="Header partial filename (default: header.html)")
-    parser.add_argument("--footer", default="footer.html", help="Footer partial filename (default: footer.html)")
-    parser.add_argument(
-        "--exclude",
-        default=",".join(sorted(DEFAULT_EXCLUDE_DIRS)),
-        help="Comma-separated directory names to exclude (default includes public,scripts,partials,...)",
-    )
-    args = parser.parse_args()
+    header = load_partial("header.html")
+    footer = load_partial("footer.html")
 
-    src_root = Path(args.src).resolve()
-    out_root = (src_root / args.out).resolve()
-    partials_dir = (src_root / args.partials).resolve()
-    exclude_dirs = {x.strip() for x in args.exclude.split(",") if x.strip()}
+    # Clean public/ but keep blog outputs generated by build_blog.py
+    safe_clean_public(OUT_DIR)
 
-    header_path = partials_dir / args.header
-    footer_path = partials_dir / args.footer
+    copied = copy_non_html(SRC_DIR, OUT_DIR)
+    rendered = build_html(SRC_DIR, OUT_DIR, header, footer)
 
-    if not header_path.exists():
-        raise SystemExit(f"Missing header partial: {header_path}\nCreate it at: partials/header.html")
-
-    header = header_path.read_text(encoding="utf-8")
-    footer = read_optional(footer_path)
-
-    html_files = iter_html_files(src_root, exclude_dirs)
-
-    if not html_files:
-        print("No HTML files found to process.")
-        return 0
-
-    # Ensure output folder exists
-    out_root.mkdir(parents=True, exist_ok=True)
-
-    built_count = 0
-    for f in html_files:
-        original = f.read_text(encoding="utf-8")
-        updated = inject_partials(original, header, footer)
-
-        # If no markers, still copy the file to /public so it gets published
-        out_path = write_out(f, src_root, out_root, updated)
-        built_count += 1
-        print(f"Built: {f.relative_to(src_root)} -> {out_path.relative_to(src_root)}")
-
-    print(f"\nDone. Built {built_count} page(s) into: {out_root.relative_to(src_root)}")
-    return 0
-
+    print(f"Built site:")
+    print(f"- HTML rendered: {rendered}")
+    print(f"- Non-HTML assets copied: {copied}")
+    print(f"Output: {OUT_DIR}")
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    main()
 
