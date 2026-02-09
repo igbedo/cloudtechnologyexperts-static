@@ -262,3 +262,59 @@ body:not(.has-hero) #sidebar-toggle::before{
 #header-sticky.header__area::before{
   pointer-events: none;
 }
+
+/* =========================================
+   CTE Mobile Brand Bar (logo + hamburger)
+   ========================================= */
+.cte-brandbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+
+  background:#fff;
+  border-radius:12px;
+  padding:10px 12px;
+
+  /* helps it stand out on hero images */
+  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+}
+
+/* Logo sizing */
+.cte-brandbar .logo img{
+  width: 64px;
+  height:auto;
+  display:block;
+}
+
+/* Hamburger button */
+.cte-hamburger{
+  width:44px;
+  height:44px;
+  border:0;
+  background:transparent;
+  display:inline-flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  padding:0;
+  cursor:pointer;
+}
+
+.cte-hamburger span{
+  display:block;
+  width:26px;
+  height:2px;
+  background:#111; /* always visible on the white bar */
+  border-radius:2px;
+}
+
+/* On desktop, keep brandbar transparent if you want */
+@media (min-width: 1200px){
+  .cte-brandbar{
+    background: transparent;
+    box-shadow:none;
+    padding:0;
+  }
+}
