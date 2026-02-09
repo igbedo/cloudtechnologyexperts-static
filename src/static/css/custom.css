@@ -318,3 +318,20 @@ body:not(.has-hero) #sidebar-toggle::before{
     padding:0;
   }
 }
+
+/* =========================================
+   HOME PAGE – MOBILE HERO SPACING FIX
+   ========================================= */
+
+@media (max-width: 767px){
+
+  body.is-home .page__title-wrapper{
+    margin-top: 40px !important;   /* was mt-110 (~110px) */
+  }
+
+  body.is-home .page__title-height{
+    min-height: 280px !important;  /* reduce giant hero height */
+  }
+
+}
+
