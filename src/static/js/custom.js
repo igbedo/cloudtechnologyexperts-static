@@ -44,16 +44,11 @@ $(".list-group-item").click(function() {
   ready(function () {
     const sidebar = document.querySelector(".sidebar__area");
     const overlay = document.querySelector(".body-overlay");
-    const openBtn = document.getElementById("sidebar-toggle");
     const closeBtn = document.getElementById("sidebar__close-btn");
 
     if (!sidebar || !overlay || !openBtn) return;
 
-    function openSidebar() {
-      sidebar.classList.add("is-open");
-      overlay.classList.add("is-open");
-      document.body.style.overflow = "hidden";
-    }
+    
 
     function closeSidebar() {
       sidebar.classList.remove("is-open");
@@ -61,10 +56,7 @@ $(".list-group-item").click(function() {
       document.body.style.overflow = "";
     }
 
-    openBtn.addEventListener("click", function (e) {
-      e.preventDefault();
-      openSidebar();
-    });
+
 
     if (closeBtn) {
       closeBtn.addEventListener("click", function (e) {
@@ -129,41 +121,11 @@ document.addEventListener("DOMContentLoaded", () => {
 })();
 
 
-<script>
-  (function () {
-    const btn = document.getElementById('sidebar-toggle') || document.getElementById('cte-sidebar-toggle');
-    const sidebar = document.querySelector('.sidebar__area');
-    const overlay = document.querySelector('.body-overlay');
-    const closeBtn = document.getElementById('sidebar__close-btn');
-
-    if (!btn || !sidebar) return;
-
-    function openMenu() {
-      sidebar.classList.add('is-open');
-      if (overlay) overlay.classList.add('is-open');
-      document.body.classList.add('menu-open');
-    }
-
-    function closeMenu() {
-      sidebar.classList.remove('is-open');
-      if (overlay) overlay.classList.remove('is-open');
-      document.body.classList.remove('menu-open');
-    }
-
-    btn.addEventListener('click', openMenu);
-    btn.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') openMenu();
-    });
-
-    if (closeBtn) closeBtn.addEventListener('click', closeMenu);
-    if (overlay) overlay.addEventListener('click', closeMenu);
-  })();
-</script>
 
 
 // ===== GUARANTEED MOBILE MENU TOGGLE =====
 document.addEventListener("DOMContentLoaded", () => {
-  const toggle = document.getElementById("sidebar-toggle");
+
   const sidebar = document.querySelector(".sidebar__area");
   const overlay = document.querySelector(".body-overlay");
   const closeBtn = document.getElementById("sidebar__close-btn");
@@ -194,7 +156,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Support BOTH ids (old + new), use whichever exists
   const btn =
     document.getElementById("cte-sidebar-toggle") ||
-    document.getElementById("sidebar-toggle");
+   
 
   const sidebar = document.querySelector(".sidebar__area");
   const overlay = document.querySelector(".body-overlay");
