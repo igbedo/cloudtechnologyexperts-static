@@ -516,27 +516,4 @@ body:not(.has-hero) #sidebar-toggle::before{
   }
 }
 
-/* =========================
-   CLEAN 3-LINE HAMBURGER
-   ========================= */
 
-.cte-hamburger {
-  width: 28px;
-  height: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  background: transparent;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  z-index: 100000;
-}
-
-.cte-hamburger span {
-  display: block;
-  width: 100%;
-  height: 3px;
-  background: #111;   /* black for white header */
-  border-radius: 2px;
-}
