@@ -188,3 +188,52 @@ document.addEventListener("DOMContentLoaded", () => {
   closeBtn && closeBtn.addEventListener("click", closeMenu);
 });
 
+
+// ===== SINGLE, RELIABLE MOBILE SIDEBAR TOGGLE =====
+document.addEventListener("DOMContentLoaded", () => {
+  // Support BOTH ids (old + new), use whichever exists
+  const btn =
+    document.getElementById("cte-sidebar-toggle") ||
+    document.getElementById("sidebar-toggle");
+
+  const sidebar = document.querySelector(".sidebar__area");
+  const overlay = document.querySelector(".body-overlay");
+  const closeBtn = document.getElementById("sidebar__close-btn");
+
+  if (!btn || !sidebar) return;
+
+  const openMenu = (e) => {
+    if (e) e.preventDefault();
+    sidebar.classList.add("is-open");
+    if (overlay) overlay.classList.add("is-open");
+    document.body.classList.add("menu-open");
+  };
+
+  const closeMenu = (e) => {
+    if (e) e.preventDefault();
+    sidebar.classList.remove("is-open");
+    if (overlay) overlay.classList.remove("is-open");
+    document.body.classList.remove("menu-open");
+  };
+
+  // Click
+  btn.addEventListener("click", openMenu);
+
+  // iPhone portrait sometimes needs touchstart if something is weird
+  btn.addEventListener(
+    "touchstart",
+    (e) => {
+      openMenu(e);
+    },
+    { passive: false }
+  );
+
+  if (closeBtn) closeBtn.addEventListener("click", closeMenu);
+  if (overlay) overlay.addEventListener("click", closeMenu);
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeMenu();
+  });
+});
+
+

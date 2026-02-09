@@ -623,3 +623,15 @@ body:not(.has-hero) #sidebar-toggle::before{
   border-radius: 2px;
 }
 
+/* Ensure nothing blocks the hamburger tap (portrait issue) */
+#header-sticky::before,
+.page__title-area::before,
+.page__title-overlay::before {
+  pointer-events: none !important;
+}
+
+#cte-sidebar-toggle {
+  position: relative !important;
+  z-index: 999999 !important;
+  pointer-events: auto !important;
+}
