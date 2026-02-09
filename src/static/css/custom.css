@@ -574,3 +574,52 @@ body:not(.has-hero) #sidebar-toggle::before{
   }
 }
 
+
+/* ===== GUARANTEE HAMBURGER IS CLICKABLE ON MOBILE ===== */
+
+/* Your header overlay/gradient must NEVER block clicks */
+#header-sticky::before,
+.header__area::before,
+.page__title-area::before,
+.page__title-overlay::before {
+  pointer-events: none !important;
+}
+
+/* Put the header above the hero image layers */
+#header-sticky {
+  position: fixed !important;
+  top: 0; left: 0;
+  width: 100%;
+  z-index: 2147483000 !important;
+}
+
+/* Make the hamburger itself sit ABOVE everything */
+#sidebar-toggle {
+  position: relative !important;
+  z-index: 2147483647 !important;
+  pointer-events: auto !important;
+  touch-action: manipulation;
+}
+
+/* Give it a real tap area */
+.cte-hamburger {
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  background: rgba(255,255,255,0.92); /* so black lines show */
+  border-radius: 10px;
+}
+
+/* The 3 lines */
+.cte-hamburger span{
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: #111;
+  margin: 4px 0;
+  border-radius: 2px;
+}
+

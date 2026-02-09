@@ -160,3 +160,31 @@ document.addEventListener("DOMContentLoaded", () => {
   })();
 </script>
 
+
+// ===== GUARANTEED MOBILE MENU TOGGLE =====
+document.addEventListener("DOMContentLoaded", () => {
+  const toggle = document.getElementById("sidebar-toggle");
+  const sidebar = document.querySelector(".sidebar__area");
+  const overlay = document.querySelector(".body-overlay");
+  const closeBtn = document.getElementById("sidebar__close-btn");
+
+  if (!toggle || !sidebar || !overlay) return;
+
+  const openMenu = () => {
+    sidebar.classList.add("is-open");
+    overlay.classList.add("is-open");
+  };
+
+  const closeMenu = () => {
+    sidebar.classList.remove("is-open");
+    overlay.classList.remove("is-open");
+  };
+
+  // Click + touch (iOS sometimes needs touchstart)
+  toggle.addEventListener("click", openMenu);
+  toggle.addEventListener("touchstart", (e) => { e.preventDefault(); openMenu(); }, { passive: false });
+
+  overlay.addEventListener("click", closeMenu);
+  closeBtn && closeBtn.addEventListener("click", closeMenu);
+});
+
