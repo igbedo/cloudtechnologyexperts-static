@@ -3,28 +3,22 @@
     <div class="container-fluid">
       <div class="row align-items-center">
 
-        <!-- LEFT: Logo + Hamburger (same white bar) -->
+        <!-- LEFT: Logo -->
         <div class="col-6 col-lg-4">
-          <div class="header__left cte-brandbar">
+          <div class="header__left d-flex align-items-center">
             <div class="logo">
               <a href="/">
                 <img src="/static/img/logo/logo.png" alt="logo">
               </a>
             </div>
-
-            <!-- Mobile hamburger right next to logo -->
-            <div class="sidebar__menu d-xl-none">
-              <button class="cte-hamburger" id="sidebar-toggle" type="button" aria-label="Open menu">
-                <span></span><span></span><span></span>
-              </button>
-            </div>
           </div>
         </div>
 
-        <!-- RIGHT: Desktop nav + Apply -->
+        <!-- RIGHT: Desktop menu + Desktop Apply + Mobile Apply + Mobile Hamburger -->
         <div class="col-6 col-lg-8">
           <div class="header__right d-flex justify-content-end align-items-center">
 
+            <!-- Desktop menu (only shows on xl and up) -->
             <div class="main-menu d-none d-xl-block">
               <nav id="mobile-menu">
                 <ul style="white-space: nowrap;">
@@ -81,8 +75,21 @@
               </nav>
             </div>
 
-            <div class="header__btn ml-20 d-none d-sm-block">
-              <a href="/application/" class="e-btn">Apply<i class="fa fa-arrow-right"></i></a>
+            <!-- Desktop Apply (only xl and up) -->
+            <div class="header__btn ml-20 d-none d-xl-block">
+              <a href="/application/" class="e-btn">Apply <i class="fa fa-arrow-right"></i></a>
+            </div>
+
+            <!-- Mobile Apply (shows under xl) -->
+            <div class="header__btn ml-10 d-xl-none">
+              <a href="/application/" class="e-btn e-btn-sm">Apply</a>
+            </div>
+
+            <!-- Mobile Hamburger (shows under xl) -->
+            <div class="sidebar__menu d-xl-none">
+              <button class="cte-hamburger ml-10" id="sidebar-toggle" type="button" aria-label="Open menu">
+                <span></span><span></span><span></span>
+              </button>
             </div>
 
           </div>
