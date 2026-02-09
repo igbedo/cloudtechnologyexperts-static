@@ -531,6 +531,46 @@ body:not(.has-hero) #sidebar-toggle::before{
 .sidebar__area { right: -320px; transition: right .25s ease; }
 .sidebar__area.is-open { right: 0; }
 
-.body-overlay { opacity: 0; visibility: hidden; transition: .2s; }
 .body-overlay.is-open { opacity: 1; visibility: visible; }
+
+
+/* ============================================
+   FORCE MOBILE HAMBURGER TO ALWAYS BE CLICKABLE
+   ============================================ */
+
+@media (max-width: 991px) {
+
+  /* Kill ANY overlay blocking clicks */
+  .page__title-overlay,
+  .page__title-area::before,
+  #header-sticky::before {
+    pointer-events: none !important;
+  }
+
+  /* Force hamburger above everything */
+  #sidebar-toggle,
+  .cte-hamburger {
+    position: relative !important;
+    z-index: 999999 !important;
+    pointer-events: auto !important;
+  }
+
+  /* Make sure header sits above hero */
+  #header-sticky {
+    z-index: 999998 !important;
+  }
+
+.body-overlay {
+  opacity: 0;
+  visibility: hidden;
+  transition: .2s;
+  z-index: 999990 !important;
+}
+
+
+  /* Sidebar highest */
+  .sidebar__area {
+    z-index: 999999 !important;
+  }
+}
 
