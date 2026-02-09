@@ -260,14 +260,6 @@ box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   background-size: cover;
 }
 
-/* Mobile: show the full image */
-@media (max-width: 767px) {
-  .page__title-area {
-    background-size: contain !important;   /* show full image */
-    background-position: center top !important;
-    background-color: #0b0f19;            /* fill the empty space */
-  }
-}
 
 
 /* ---------- MOBILE NAV: ALWAYS SHOW HAMBURGER ON <=991px ---------- */
@@ -670,5 +662,119 @@ body{ padding-top: 88px; }
 /* Home: often needs slightly more breathing room */
 @media (max-width: 480px){
   body.is-home{ padding-top: 78px; }
+}
+
+
+/* =========================================================
+   MOBILE + HERO HEADER FIX (contrast + remove dark gap)
+   Put this at the BOTTOM of custom.css
+   ========================================================= */
+
+/* Keep header above everything */
+#header-sticky.header__area{
+  position: fixed !important;
+  top: 0; left: 0;
+  width: 100%;
+  z-index: 99999 !important;
+  background: transparent !important;
+}
+
+/* Default: no overlay */
+#header-sticky.header__area::before{ content: none !important; }
+
+/* HERO pages: subtle “glass” so menu readable but not a thick black bar */
+body.has-hero #header-sticky.header__area::before{
+  content:"" !important;
+  position:absolute;
+  inset:0;
+  height: 76px; /* smaller so it doesn't look like a big bar */
+  background: linear-gradient(
+    to bottom,
+    rgba(10,14,24,0.55),
+    rgba(10,14,24,0.15),
+    rgba(10,14,24,0.00)
+  );
+  pointer-events:none;
+}
+
+/* Ensure header content is above the overlay */
+#header-sticky.header__area .container-fluid{
+  position: relative;
+  z-index: 2;
+}
+
+/* -------------------------
+   HOME PAGE: light header, no black bar
+   ------------------------- */
+body.is-home #header-sticky.header__area{
+  background: rgba(255,255,255,0.92) !important;
+  backdrop-filter: blur(10px);
+}
+body.is-home #header-sticky.header__area::before{ content:none !important; }
+
+/* Home: dark nav text */
+body.is-home #header-sticky .main-menu nav ul li a,
+body.is-home #header-sticky .header__btn a,
+body.is-home #header-sticky .mean-container a{
+  color: #111 !important;
+  text-shadow: none !important;
+}
+
+/* -------------------------
+   HERO PAGES: white nav text
+   ------------------------- */
+body.has-hero #header-sticky .main-menu nav ul li a,
+body.has-hero #header-sticky .header__btn a{
+  color: #fff !important;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.35);
+}
+
+/* Hamburger lines: white on hero, dark on home */
+body.has-hero .sidebar-toggle-btn .line{ background:#fff !important; }
+body.is-home .sidebar-toggle-btn .line{ background:#111 !important; }
+
+/* ---------------------------------------------------------
+   MOBILE NAV: ALWAYS SHOW HAMBURGER (portrait included)
+   --------------------------------------------------------- */
+@media (max-width: 991px){
+  .main-menu{ display:none !important; }
+
+  .sidebar__menu,
+  #sidebar-toggle{
+    display:block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  #sidebar-toggle{
+    position: relative;
+    z-index: 100000 !important;
+  }
+}
+
+/* ---------------------------------------------------------
+   HERO IMAGE: remove dark gap (use COVER on mobile)
+   --------------------------------------------------------- */
+.page__title-area{
+  background-repeat: no-repeat;
+  background-size: cover !important;
+  background-position: 50% 35%;
+}
+
+/* On phones: keep cover + top-ish focus, no empty block */
+@media (max-width: 767px){
+  .page__title-area{
+    background-position: center top !important;
+    min-height: 320px;          /* prevents tiny squished hero */
+  }
+}
+
+/* Make hero text readable (some pages were inheriting dark text) */
+body.has-hero .page__title-wrapper,
+body.has-hero .page__title-wrapper h3,
+body.has-hero .page__title-wrapper p,
+body.has-hero .breadcrumb li,
+body.has-hero .breadcrumb a{
+  color:#fff !important;
 }
 
