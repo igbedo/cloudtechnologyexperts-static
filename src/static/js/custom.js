@@ -199,3 +199,89 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+/* ==========================
+   CTE Overview Section
+   ========================== */
+
+.cte-overview-section {
+  padding: 100px 0;
+  background: #f8fafc;
+}
+
+.cte-section-title {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.cte-section-subtitle {
+  font-size: 18px;
+  color: #6c757d;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* Cards */
+.cte-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 40px;
+  height: 100%;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.06);
+  transition: 0.3s ease;
+}
+
+.cte-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+}
+
+.cte-card-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 25px;
+}
+
+/* List Styling */
+.cte-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.cte-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 16px;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+.cte-list i {
+  color: #f05023; /* your brand orange */
+  margin-top: 3px;
+  font-size: 18px;
+}
+
+/* Note */
+.cte-note {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #6c757d;
+}
+
+/* Mobile */
+@media (max-width: 767px){
+  .cte-overview-section {
+    padding: 70px 20px;
+  }
+
+  .cte-card {
+    padding: 30px;
+  }
+
+  .cte-section-title {
+    font-size: 26px;
+  }
+}
