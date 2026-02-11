@@ -103,7 +103,7 @@
                      <div class="row">
                         <div class="col-xxl-12">
                            <div class="footer__copyright text-center">
-                              <p>© 2026 Cloud Technology Experts-All Rights Reserved.</p>
+                             <div>© <span id="footer-year"></span> Cloud Technology Experts-All Rights Reserved.</div>
                            </div>
                         </div>
                      </div>
@@ -111,3 +111,10 @@
                </div>
             </div>
          </footer>
+
+   <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const el = document.getElementById("footer-year");
+    if (el) el.textContent = new Date().getFullYear();
+  });
+</script>
